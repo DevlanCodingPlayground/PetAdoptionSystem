@@ -64,7 +64,3 @@
  *   TORT OR ANY OTHER THEORY OF LIABILITY, EXCEED THE LICENSE FEE PAID BY YOU, IF ANY.
  *
  */
-
-
-
-echo "You have successfully installed this framework now start coding";
