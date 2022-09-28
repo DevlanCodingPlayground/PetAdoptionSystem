@@ -82,7 +82,7 @@ require_once('../partials/head.php');
 
                 <form method="post">
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" name="login_username" placeholder="Email">
+                        <input type="email" class="form-control" required name="login_username" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -90,7 +90,7 @@ require_once('../partials/head.php');
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="login_password" placeholder="Password">
+                        <input type="password" class="form-control" required name="login_password" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -99,7 +99,7 @@ require_once('../partials/head.php');
                     </div>
                     <div class="row">
                         <div class="col-8">
-                            <a href="forgot-password.html">I forgot my password</a>
+                            <a href="reset_password">I forgot my password</a>
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
@@ -110,8 +110,8 @@ require_once('../partials/head.php');
                 </form>
                 <hr>
                 <div class="text-center">
-                    <a href="register.html" class="btn btn-primary">Join as Pet Owner</a>
-                    <a href="register.html" class="btn btn-primary">Join as Pet Adopter</a>
+                    <a href="register?as=Owner" class="btn btn-primary">Join as Pet Owner</a>
+                    <a href="register?as=Adopter" class="btn btn-primary">Join as Pet Adopter</a>
                 </div>
             </div>
             <!-- /.login-card-body -->
