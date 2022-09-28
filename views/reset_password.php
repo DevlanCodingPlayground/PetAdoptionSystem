@@ -96,7 +96,7 @@ require_once('../partials/head.php');
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" name="Login" class="btn btn-primary btn-block">Reset</button>
+                            <button type="submit" name="Reset_Password_Step_1" class="btn btn-primary btn-block">Reset</button>
                         </div>
                         <!-- /.col -->
                     </div>
