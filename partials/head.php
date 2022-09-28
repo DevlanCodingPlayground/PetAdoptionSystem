@@ -18,4 +18,13 @@
     <link rel="stylesheet" href="../public/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../public/plugins/toastr/toastr.min.css">
+    <?php
+    /* Alert Sesion Via Alerts */
+    if (isset($_SESSION['success'])) {
+        $success = $_SESSION['success'];
+        unset($_SESSION['success']);
+    }
+    ?>
 </head>
