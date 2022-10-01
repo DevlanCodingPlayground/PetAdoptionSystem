@@ -129,7 +129,18 @@ if (isset($_POST['Register_Pet_Adopter'])) {
             /* Get Newly Inserted Login Id */
             $login_id = $mysqli->insert_id;
 
-            /* Persist  */
+            /* Persist Adopter Record */
+            $adopter_sql = "INSERT INTO pet_adopter(pet_adopter_name, pet_adopter_email, pet_adopter_phone_number, pet_adopter_address)
+            VALUES('{$pet_adopter_name}', '{$pet_adopter_email}', '{$pet_adopter_phone_number}', '{$pet_adopter_address}')";
+
+            if (mysqli_query($mysqli, $adopter_sql)) {
+                /* Redirect To Login After Successful Sign Up */
+                $_SESSION['success'] = 'Account created successfully';
+                header('Location: ../');
+                exit;
+            }
+        } else {
+            $err = "Failed saving login information, please try again";
         }
     }
 }
