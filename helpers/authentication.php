@@ -110,7 +110,7 @@ if (isset($_POST['Register_Pet_Adopter'])) {
     /* Auth Variables */
     $login_username = mysqli_real_escape_string($mysqli, $_POST['login_username']);
     $login_password = md5(mysqli_real_escape_string($mysqli, $_POST['login_password']));
-    $login_rank = mysqli_real_escape_string($mysqli, $_POST['Adopter']);
+    $login_rank = mysqli_real_escape_string($mysqli, 'Adopter');
 
     /* Prevent Double submissions */
     $sql = "SELECT * FROM  login   WHERE login_username = '{$login_username}'";
@@ -155,7 +155,7 @@ if (isset($_POST['Register_Pet_Owner'])) {
     /* Auth Variables */
     $login_username = mysqli_real_escape_string($mysqli, $_POST['login_username']);
     $login_password = md5(mysqli_real_escape_string($mysqli, $_POST['login_password']));
-    $login_rank = mysqli_real_escape_string($mysqli, $_POST['Owner']);
+    $login_rank = mysqli_real_escape_string($mysqli, 'Owner');
 
     /* Prevent Double submissions */
     $sql = "SELECT * FROM  login   WHERE login_username = '{$login_username}'";
@@ -176,7 +176,7 @@ if (isset($_POST['Register_Pet_Owner'])) {
 
             /* Persist Owner Record */
             $owner_sql = "INSERT INTO pet_owner(pet_owner_login_id, pet_owner_name, pet_owner_email, pet_owner_contacts, pet_owner_address)
-            VALUES('{$pet_owner_login_id}', '{$pet_owner_name}', '{$pet_owner_email}', '{$pet_owner_contacts}', '{$pet_owner_address}')";
+            VALUES('{$login_id}', '{$pet_owner_name}', '{$pet_owner_email}', '{$pet_owner_contacts}', '{$pet_owner_address}')";
 
             if (mysqli_query($mysqli, $owner_sql)) {
                 /* Redirect To Login After Successful Sign Up */

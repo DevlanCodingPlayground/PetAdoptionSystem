@@ -94,7 +94,7 @@ require_once('../partials/head.php');
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" required name="pet_owner_email" placeholder="Full Email">
+                            <input type="text" class="form-control" required name="pet_owner_email" placeholder="Email">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -102,7 +102,7 @@ require_once('../partials/head.php');
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" required name="pet_owner_email" placeholder="Phone Number">
+                            <input type="text" class="form-control" required name="pet_owner_contacts" placeholder="Phone Number">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-phone"></span>
@@ -140,7 +140,7 @@ require_once('../partials/head.php');
                             </div>
                             <!-- /.col -->
                             <div class="col-4">
-                                <button type="submit" name="Register_Pet_Adopter" class="btn btn-primary btn-block">Register</button>
+                                <button type="submit" name="Register_Pet_Owner" class="btn btn-primary btn-block">Register</button>
                             </div>
                             <!-- /.col -->
                         </div>
