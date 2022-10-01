@@ -77,74 +77,153 @@ require_once('../partials/head.php');
             <a href=""><b>i</b>Pet</a>
         </div>
         <!-- /.login-logo -->
-        <div class="card">
-            <div class="card-body login-card-body">
-                <p class="login-box-msg">Join as Pet <?php echo $_GET['as']; ?></p>
+        <?php
+        if ($_GET['as'] == 'Owner') {
+        ?>
+            <div class="card">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">Join as Pet <?php echo $_GET['as']; ?></p>
 
-                <form method="post">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" required name="pet_adopter_name" placeholder="Full Names">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
+                    <form method="post">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" required name="pet_owner_name" placeholder="Full Names">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" required name="pet_adopter_email" placeholder="Full Email">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" required name="pet_owner_email" placeholder="Full Email">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" required name="pet_adopter_phone_number" placeholder="Phone Number">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-phone"></span>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" required name="pet_owner_email" placeholder="Phone Number">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-phone"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" required name="pet_adopter_address" placeholder="Address">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-map-pin"></span>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" required name="pet_owner_address" placeholder="Address">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-map-pin"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" required name="login_username" placeholder="Login Username">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user-tag"></span>
+                        <hr>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" required name="login_username" placeholder="Login Username">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user-tag"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" required name="login_password" placeholder="Password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control" required name="login_password" placeholder="Password">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <a href="../">Already has account</a>
+                        <div class="row">
+                            <div class="col-8">
+                                <a href="../">Already has account</a>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" name="Register_Pet_Adopter" class="btn btn-primary btn-block">Register</button>
+                            </div>
+                            <!-- /.col -->
                         </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" name="Register_Pet_Adopter" class="btn btn-primary btn-block">Register</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </form>
+                    </form>
+                </div>
+                <!-- /.login-card-body -->
             </div>
-            <!-- /.login-card-body -->
-        </div>
+        <?php } else if ($_GET['as'] == 'Adopter') { ?>
+            <div class="card">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">Join as Pet <?php echo $_GET['as']; ?></p>
+
+                    <form method="post">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" required name="pet_adopter_name" placeholder="Full Names">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" required name="pet_adopter_email" placeholder="Full Email">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" required name="pet_adopter_phone_number" placeholder="Phone Number">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-phone"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" required name="pet_adopter_address" placeholder="Address">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-map-pin"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" required name="login_username" placeholder="Login Username">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user-tag"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control" required name="login_password" placeholder="Password">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <a href="../">Already has account</a>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" name="Register_Pet_Adopter" class="btn btn-primary btn-block">Register</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+                </div>
+                <!-- /.login-card-body -->
+            </div>
+        <?php } else {
+            /* Error If Someone Tries To Play With The Url */
+            $_SESSION['success'] = 'Horah, you have unlocked an hidden easter egg';
+            header('Location: ../');
+            exit;
+        } ?>
+
     </div>
     <!-- /.login-box -->
 
