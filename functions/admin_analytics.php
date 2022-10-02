@@ -104,13 +104,13 @@ $stmt->close();
 $query = "SELECT COUNT(*)  FROM pet WHERE pet_adoption_status = 'Pending' ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
-$stmt->bind_result($available_pet);
+$stmt->bind_result($available_pets);
 $stmt->fetch();
 $stmt->close();
 
 
 /* Total Amount */
-$query = "SELECT SUM(payment_amount)  FROM pet WHERE pet_adoption_status = 'Pending' ";
+$query = "SELECT SUM(payment_amount)  FROM payment ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($payment_amount);
