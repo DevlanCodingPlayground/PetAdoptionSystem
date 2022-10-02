@@ -111,7 +111,7 @@ require_once('../partials/head.php');
                                 <div class="inner">
                                     <h3>150</h3>
 
-                                    <p>New Orders</p>
+                                    <p>Pet Owners</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
@@ -125,8 +125,7 @@ require_once('../partials/head.php');
                             <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                                    <p>Bounce Rate</p>
+                                    <p>Pet Adopters</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
@@ -140,8 +139,7 @@ require_once('../partials/head.php');
                             <div class="small-box bg-warning">
                                 <div class="inner">
                                     <h3>44</h3>
-
-                                    <p>User Registrations</p>
+                                    <p>Registered Pets</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
@@ -155,8 +153,7 @@ require_once('../partials/head.php');
                             <div class="small-box bg-danger">
                                 <div class="inner">
                                     <h3>65</h3>
-
-                                    <p>Unique Visitors</p>
+                                    <p>Successful Adoptions</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
