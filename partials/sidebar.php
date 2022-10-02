@@ -20,48 +20,48 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="dashboard" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
+                    <a href="staffs" class="nav-link">
+                        <i class="nav-icon fas fa-user-tie"></i>
                         <p>
                             Staffs
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="dashboard" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
+                    <a href="pet_owners" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
                             Pet Owners
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="dashboard" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
+                    <a href="pet_adopters" class="nav-link">
+                        <i class="nav-icon fas fa-user-tag"></i>
                         <p>
                             Pet Adopters
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="dashboard" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
+                    <a href="pets" class="nav-link">
+                        <i class="nav-icon fas fa-cat"></i>
                         <p>
                             Pets
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="dashboard" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
+                    <a href="adoptions" class="nav-link">
+                        <i class="nav-icon fas fa-paw"></i>
                         <p>
                             Adoptions
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="dashboard" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
+                    <a href="payments" class="nav-link">
+                        <i class="nav-icon fas fa-hand-holding-usd"></i>
                         <p>
                             Payments
                         </p>
