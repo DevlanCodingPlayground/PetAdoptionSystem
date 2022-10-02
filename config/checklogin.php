@@ -80,3 +80,7 @@ function check_login()
 		header("Location: http://$host$uri/$extra");
 	}
 }
+
+
+/* Invoke It */
+check_login();
