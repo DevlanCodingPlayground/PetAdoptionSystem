@@ -93,7 +93,7 @@ if (isset($_POST['Add_Staff'])) {
             $login_id = $mysqli->insert_id;
 
             /* Persist Adopter Record */
-            $admin_sql = "INSERT INTO ADMIN(admin_login_id, admin_name)
+            $admin_sql = "INSERT INTO admin (admin_login_id, admin_name)
             VALUES('{$login_id}', '{$admin_name}')";
 
             if (mysqli_query($mysqli, $admin_sql)) {

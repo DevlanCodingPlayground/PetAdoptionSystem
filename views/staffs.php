@@ -117,21 +117,17 @@ require_once('../partials/head.php');
                             <div class="modal-body">
                                 <form method="post" enctype="multipart/form-data" role="form">
                                     <div class="row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="">Full Names</label>
                                             <input type="text" required name="admin_name" class="form-control">
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="">Login Username</label>
                                             <input type="text" required name="login_username" class="form-control">
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="">Login Password</label>
-                                            <input type="password" required name="new_password" class="form-control">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="">Confirm Password</label>
-                                            <input type="password" required name="confirm_password" class="form-control">
+                                            <input type="password" required name="login_password" class="form-control">
                                         </div>
                                     </div>
                                     <div class="text-right">
