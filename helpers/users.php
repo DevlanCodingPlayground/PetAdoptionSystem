@@ -130,4 +130,13 @@ if (isset($_POST['Update_Staff'])) {
 
 /* Delete Staffs */
 if (isset($_POST['Delete_User'])) {
+    $login_id = mysqli_real_escape_string($mysqli, $_POST['login_id']);
+
+    /* Persist */
+    $sql = "DELETE FROM login WHERE login_id = '{$login_id}'";
+    if (mysqli_query($mysqli, $sql)) {
+        $success = "Account deleted";
+    } else {
+        $err = "Failed, please try again";
+    }
 }
