@@ -104,3 +104,30 @@ if (isset($_POST['Add_Staff'])) {
         }
     }
 }
+
+
+/* Update Staffs */
+
+if (isset($_POST['Update_Staff'])) {
+    $admin_name = mysqli_real_escape_string($mysqli, $_POST['admin_name']);
+    $login_id = mysqli_real_escape_string($mysqli, $_POST['login_id']);
+
+    /* Auth Variables */
+    $login_username = mysqli_real_escape_string($mysqli, $_POST['login_username']);
+    $login_password = md5(mysqli_real_escape_string($mysqli, $_POST['login_password']));
+
+    /* Persist */
+    $auth_sql = "UPDATE login SET login_username = '{$login_username}', login_password = '{$login_password}' WHERE login_id = '{$login_id}'";
+    $admin_sql = "UPDATE admin SET admin_name = '{$admin_name}' WHERE admin_login_id = '{$login_id}'";
+
+    if (mysqli_query($mysqli, $auth_sql) && mysqli_query($mysqli, $admin_sql)) {
+        $success = "Account updated";
+    } else {
+        $err = "Failed, please try again";
+    }
+}
+
+
+/* Delete Staffs */
+if (isset($_POST['Delete_User'])) {
+}
