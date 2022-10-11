@@ -145,7 +145,106 @@ require_once('../partials/head.php');
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-warning card-outline">
+                                <div class="card-body">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Names</th>
+                                                <th>Login Username</th>
+                                                <th>Manage</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $ret = "SELECT * FROM login l
+                                            INNER JOIN admin a ON a.admin_login_id  = l.login_id";
+                                            $stmt = $mysqli->prepare($ret);
+                                            $stmt->execute(); //ok
+                                            $res = $stmt->get_result();
+                                            while ($user = $res->fetch_object()) {
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $user->admin_name; ?></td>
+                                                    <td><?php echo $user->login_username; ?></td>
+                                                    <td>
+                                                        <a data-toggle="modal" href="#update_<?php echo $user->admin_id; ?>" class="badge badge-primary"><i class="fas fa-edit"></i> Edit</a>
+                                                        <a data-toggle="modal" href="#delete_<?php echo $user->admin_id; ?>" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>
+                                                    </td>
+                                                    <!-- Update Modal -->
+                                                    <div class="modal fade fixed-right" id="update_<?php echo $user->admin_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                                        <div class="modal-dialog  modal-xl" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header align-items-center">
+                                                                    <div class="text-bold">
+                                                                        <h6 class="text-bold">Update Staff Account</h6>
+                                                                    </div>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form method="post" enctype="multipart/form-data" role="form">
+                                                                        <div class="row">
+                                                                            <div class="form-group col-md-4">
+                                                                                <label for="">Full Names</label>
+                                                                                <input type="hidden" required name="admin_id" value="<?php echo $user->admin_id; ?>" class="form-control">
+                                                                                <input type="text" required name="admin_name" value="<?php echo $user->admin_name; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-4">
+                                                                                <label for="">Login Username</label>
+                                                                                <input type="text" required name="login_username" value="<?php echo $user->login_username; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-4">
+                                                                                <label for="">Login Password</label>
+                                                                                <input type="password" required name="login_password" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="text-right">
+                                                                            <button type="submit" name="Update_Staff" class="btn btn-warning">Update Staff</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Modal -->
 
+                                                    <!-- Delete Modal -->
+                                                    <div class="modal fade" id="delete_<?php echo $user->admin_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">CONFIRM DELETE</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal">
+                                                                        <span>&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form method="POST">
+                                                                    <div class="modal-body text-center text-danger">
+                                                                        <h4>Delete?</h4>
+                                                                        <br>
+                                                                        <!-- Hide This -->
+                                                                        <input type="hidden" name="login_id" value="<?php echo $user->login_id; ?>">
+                                                                        <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                                        <input type="submit" name="Delete_User" value="Delete" class="text-center btn btn-danger">
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Modal -->
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
