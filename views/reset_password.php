@@ -71,7 +71,7 @@ require_once('../helpers/authentication.php');
 require_once('../partials/head.php');
 ?>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url('../public/img/bg.jpg'); background-size: cover; ">
     <div class="login-box">
         <div class="login-logo">
             <a href=""><b>i</b>Pet</a>
