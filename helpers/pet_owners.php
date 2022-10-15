@@ -130,7 +130,7 @@ if (isset($_POST['Update_Pet_Owner'])) {
 if (isset($_POST['Delete_Pet_Owner'])) {
     $login_id = mysqli_real_escape_string($mysqli, $_POST['login_id']);
     /* Persist */
-    $delete_sql = "DELETE FROM login SET login_id = '{$login_id}'";
+    $delete_sql = "DELETE FROM login WHERE login_id = '{$login_id}'";
 
     if (mysqli_query($mysqli, $delete_sql)) {
         $success = "Pet Owner Deleted";
