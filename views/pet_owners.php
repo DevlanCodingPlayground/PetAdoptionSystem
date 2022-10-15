@@ -118,55 +118,29 @@ require_once('../partials/head.php');
                             <div class="modal-body">
                                 <form method="post" enctype="multipart/form-data" role="form">
                                     <div class="row">
-                                        <div class="input-group mb-3 col-md-6">
+                                        <div class="form-group col-md-6">
                                             <label for="">Full Names</label>
-                                            <input type="text" class="form-control" required name="pet_owner_name" placeholder="Full Names">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-user"></span>
-                                                </div>
-                                            </div>
+                                            <input type="text" required name="pet_owner_name" class="form-control">
                                         </div>
-                                        <div class="input-group mb-3 col-md-6">
-                                            <input type="text" class="form-control" required name="pet_owner_email" placeholder="Email">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-envelope"></span>
-                                                </div>
-                                            </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Email Address</label>
+                                            <input type="email" required name="pet_owner_email" class="form-control">
                                         </div>
-                                        <div class="input-group mb-3 col-md-6">
-                                            <input type="text" class="form-control" required name="pet_owner_contacts" placeholder="Phone Number">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-phone"></span>
-                                                </div>
-                                            </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Phone Number</label>
+                                            <input type="text" required name="pet_owner_contacts" class="form-control">
                                         </div>
-                                        <div class="input-group mb-3 col-md-6">
-                                            <input type="text" class="form-control" required name="pet_owner_address" placeholder="Address">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-map-pin"></span>
-                                                </div>
-                                            </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Address</label>
+                                            <input type="text" required name="pet_owner_address" class="form-control">
                                         </div>
-                                        <hr>
-                                        <div class="input-group mb-3 col-md-6">
-                                            <input type="text" class="form-control" required name="login_username" placeholder="Login Username">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-user-tag"></span>
-                                                </div>
-                                            </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Login Username</label>
+                                            <input type="text" required name="login_username" class="form-control">
                                         </div>
-                                        <div class="input-group mb-3 col-md-6">
-                                            <input type="password" class="form-control" required name="login_password" placeholder="Password">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-lock"></span>
-                                                </div>
-                                            </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Login Password</label>
+                                            <input type="password" required name="login_password" class="form-control">
                                         </div>
                                     </div>
                                     <div class="text-right">
