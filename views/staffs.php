@@ -108,7 +108,7 @@ require_once('../partials/head.php');
                         <div class="modal-content">
                             <div class="modal-header align-items-center">
                                 <div class="text-center">
-                                    <h6 class="mb-0 text-bold"> Add Expenses</h6>
+                                    <h6 class="mb-0 text-bold"> Add Pet Owner</h6>
                                 </div>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
