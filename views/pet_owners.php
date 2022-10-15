@@ -206,7 +206,30 @@ require_once('../partials/head.php');
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-
+                                                                    <form method="post" enctype="multipart/form-data" role="form">
+                                                                        <div class="row">
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Full Names</label>
+                                                                                <input type="hidden" required name="pet_owner_id" value="<?php echo $owner->pet_owner_id; ?>" class="form-control">
+                                                                                <input type="text" required name="pet_owner_name" value="<?php echo $owner->pet_owner_name; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Email Address</label>
+                                                                                <input type="email" required name="pet_owner_email" value="<?php echo $owner->pet_owner_email; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Phone Number</label>
+                                                                                <input type="text" required name="pet_owner_contacts" value="<?php echo $owner->pet_owner_contacts; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Address</label>
+                                                                                <input type="text" required name="pet_owner_address" value="<?php echo $owner->pet_owner_address; ?>" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="text-right">
+                                                                            <button type="submit" name="Update_Pet_Owner" class="btn btn-warning">Update Pet Owner</button>
+                                                                        </div>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
