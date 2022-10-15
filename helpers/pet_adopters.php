@@ -129,4 +129,13 @@ if (isset($_POST['Update_Pet_Adopters'])) {
 
 /* Delete Pet Adopters */
 if (isset($_POST['Delete_Pet_Adopters'])) {
+    $pet_adopter_id = mysqli_real_escape_string($mysqli, $_POST['pet_adopter_id']);
+
+    /* Persist */
+    $delete_sql = "DELETE FROM pet_adopter WHERE pet_adopter_id = '{$pet_adopter_id}'";
+    if (mysqli_query($mysqli, $delete_sql)) {
+        $success = "Pet Adopter account deleted";
+    } else {
+        $err = "Failed, please try again";
+    }
 }
