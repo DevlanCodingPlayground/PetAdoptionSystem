@@ -99,10 +99,7 @@ if (isset($_POST['Add_Pet_Owner'])) {
             VALUES('{$login_id}', '{$pet_owner_name}', '{$pet_owner_email}', '{$pet_owner_contacts}', '{$pet_owner_address}')";
 
             if (mysqli_query($mysqli, $owner_sql)) {
-                /* Redirect To Login After Successful Sign Up */
-                $_SESSION['success'] = 'Account created successfully';
-                header('Location: ../');
-                exit;
+                $success = "Pet Owner Account Created";
             }
         } else {
             $err = "Failed saving login information, please try again";
@@ -112,6 +109,21 @@ if (isset($_POST['Add_Pet_Owner'])) {
 
 /* Update Pet Owner */
 if (isset($_POST['Update_Pet_Owner'])) {
+    $pet_owner_name = mysqli_real_escape_string($mysqli, $_POST['pet_owner_name']);
+    $pet_owner_email = mysqli_real_escape_string($mysqli, $_POST['pet_owner_email']);
+    $pet_owner_contacts = mysqli_real_escape_string($mysqli, $_POST['pet_owner_contacts']);
+    $pet_owner_address = mysqli_real_escape_string($mysqli, $_POST['pet_owner_address']);
+    $pet_owner_id = mysqli_real_escape_string($mysqli, $_POST['pet_owner_id']);
+
+    /* Persist */
+    $update_sql = "UPDATE pet_owner SET pet_owner_name = '{$pet_owner_name}', pet_owner_email = '{$pet_owner_email}',
+    pet_owner_contacts = '{$pet_owner_contacts}', pet_owner_address = '{$pet_owner_address}' WHERE pet_owner_id = '{$pet_owner_id}'";
+
+    if (mysqli_query($mysqli, $update_sql)) {
+        $success = "Pet Owner Updated";
+    } else {
+        $err = "Failed!, please try again";
+    }
 }
 
 /* Delete Pet Owners */
