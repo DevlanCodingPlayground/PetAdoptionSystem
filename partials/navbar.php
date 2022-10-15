@@ -24,14 +24,9 @@
 <div class="modal fade" id="logout_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">CONFIRM LOGOUT</h5>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>&times;</span>
-                </button>
-            </div>
             <form method="POST" action="logout">
                 <div class="modal-body text-center text-danger">
+                    <img src="../public/img/logo.png" style="width: 40%;">
                     <h4>Terminate Session?</h4>
                     <br>
                     <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
