@@ -89,18 +89,18 @@ require_once('../partials/head.php');
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Pet Owners</h1>
+                            <h1 class="m-0 text-dark">Pet Adopters</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Pet Owners</li>
+                                <li class="breadcrumb-item active">Pet Adopters</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                     <hr>
                     <div class="text-right">
-                        <button type="button" data-toggle="modal" data-target="#add_modal" class="btn btn-warning"> Add Pet Owner</button>
+                        <button type="button" data-toggle="modal" data-target="#add_modal" class="btn btn-warning"> Add Pet Adopter</button>
                     </div>
                 </div><!-- /.container-fluid -->
                 <!-- Add Staff -->
@@ -109,7 +109,7 @@ require_once('../partials/head.php');
                         <div class="modal-content">
                             <div class="modal-header align-items-center">
                                 <div class="text-center">
-                                    <h6 class="mb-0 text-bold"> Add Pet Owner</h6>
+                                    <h6 class="mb-0 text-bold"> Add Pet Adopter</h6>
                                 </div>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -120,19 +120,19 @@ require_once('../partials/head.php');
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="">Full Names</label>
-                                            <input type="text" required name="pet_owner_name" class="form-control">
+                                            <input type="text" required name="pet_adopter_name" class="form-control">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="">Email Address</label>
-                                            <input type="email" required name="pet_owner_email" class="form-control">
+                                            <input type="email" required name="pet_adopter_email" class="form-control">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="">Phone Number</label>
-                                            <input type="text" required name="pet_owner_contacts" class="form-control">
+                                            <input type="text" required name="pet_adopter_phone_number" class="form-control">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="">Address</label>
-                                            <input type="text" required name="pet_owner_address" class="form-control">
+                                            <input type="text" required name="pet_adopter_address" class="form-control">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="">Login Username</label>
@@ -144,7 +144,7 @@ require_once('../partials/head.php');
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <button type="submit" name="Add_Pet_Owner" class="btn btn-warning">Add Pet Owner</button>
+                                        <button type="submit" name="Add_Pet_Adopter" class="btn btn-warning">Add Pet Adopter</button>
                                     </div>
                                 </form>
                             </div>
