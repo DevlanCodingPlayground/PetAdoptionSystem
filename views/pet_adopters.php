@@ -184,22 +184,22 @@ require_once('../partials/head.php');
                                             while ($adopter = $res->fetch_object()) {
                                             ?>
                                                 <tr>
-                                                    <td><?php echo $adopter->pet_owner_name; ?></td>
-                                                    <td><?php echo $adopter->pet_owner_email; ?></td>
-                                                    <td><?php echo $adopter->pet_owner_contacts; ?></td>
-                                                    <td><?php echo $adopter->pet_owner_address; ?></td>
+                                                    <td><?php echo $adopter->pet_adopter_name; ?></td>
+                                                    <td><?php echo $adopter->pet_adopter_email; ?></td>
+                                                    <td><?php echo $adopter->pet_adopter_phone_number; ?></td>
+                                                    <td><?php echo $adopter->pet_adopter_address; ?></td>
                                                     <td><?php echo $adopter->login_username; ?></td>
                                                     <td>
-                                                        <a data-toggle="modal" href="#update_<?php echo $adopter->pet_owner_id; ?>" class="badge badge-primary"><i class="fas fa-edit"></i> Edit</a>
-                                                        <a data-toggle="modal" href="#delete_<?php echo $adopter->pet_owner_id; ?>" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>
+                                                        <a data-toggle="modal" href="#update_<?php echo $adopter->pet_adopter_id; ?>" class="badge badge-primary"><i class="fas fa-edit"></i> Edit</a>
+                                                        <a data-toggle="modal" href="#delete_<?php echo $adopter->pet_adopter_id; ?>" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>
                                                     </td>
                                                     <!-- Update Modal -->
-                                                    <div class="modal fade fixed-right" id="update_<?php echo $adopter->pet_owner_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal fade fixed-right" id="update_<?php echo $adopter->pet_adopter_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog  modal-xl" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header align-items-center">
                                                                     <div class="text-bold">
-                                                                        <h6 class="text-bold">Update <?php echo $adopter->pet_owner_name; ?> Account</h6>
+                                                                        <h6 class="text-bold">Update <?php echo $adopter->pet_adopter_name; ?> Account</h6>
                                                                     </div>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -210,20 +210,20 @@ require_once('../partials/head.php');
                                                                         <div class="row">
                                                                             <div class="form-group col-md-6">
                                                                                 <label for="">Full Names</label>
-                                                                                <input type="hidden" required name="pet_owner_id" value="<?php echo $adopter->pet_owner_id; ?>" class="form-control">
-                                                                                <input type="text" required name="pet_owner_name" value="<?php echo $adopter->pet_owner_name; ?>" class="form-control">
+                                                                                <input type="hidden" required name="pet_adopter_id" value="<?php echo $adopter->pet_adopter_id; ?>" class="form-control">
+                                                                                <input type="text" required name="pet_adopter_name" value="<?php echo $adopter->pet_adopter_name; ?>" class="form-control">
                                                                             </div>
                                                                             <div class="form-group col-md-6">
                                                                                 <label for="">Email Address</label>
-                                                                                <input type="email" required name="pet_owner_email" value="<?php echo $adopter->pet_owner_email; ?>" class="form-control">
+                                                                                <input type="email" required name="pet_adopter_email" value="<?php echo $adopter->pet_adopter_email; ?>" class="form-control">
                                                                             </div>
                                                                             <div class="form-group col-md-6">
                                                                                 <label for="">Phone Number</label>
-                                                                                <input type="text" required name="pet_owner_contacts" value="<?php echo $adopter->pet_owner_contacts; ?>" class="form-control">
+                                                                                <input type="text" required name="pet_adopter_phone_number" value="<?php echo $adopter->pet_adopter_phone_number; ?>" class="form-control">
                                                                             </div>
                                                                             <div class="form-group col-md-6">
                                                                                 <label for="">Address</label>
-                                                                                <input type="text" required name="pet_owner_address" value="<?php echo $adopter->pet_owner_address; ?>" class="form-control">
+                                                                                <input type="text" required name="pet_adopter_address" value="<?php echo $adopter->pet_adopter_address; ?>" class="form-control">
                                                                             </div>
                                                                         </div>
                                                                         <div class="text-right">
