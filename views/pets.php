@@ -197,8 +197,10 @@ require_once('../partials/head.php');
                         while ($pet = $res->fetch_object()) {
                         ?>
                             <div class="col-3 Pet_details">
-                                <div class="card ">
-                                    <img src="../public/img/pets/<?php echo $pet->pet_image; ?>" class="card-img-top" alt="...">
+                                <div class="card">
+                                    <div class="card-img-top">
+                                        <img src="../public/img/pets/<?php echo $pet->pet_image; ?>" class="card-img-top" alt="...">
+                                    </div>
                                     <div class="card-body">
                                         <h5 class="card-title">Type: <?php echo $pet->pet_type; ?> </h5><br>
                                         <h5 class="card-title">Breed: <?php echo $pet->pet_breed; ?></h5><br>
@@ -206,7 +208,7 @@ require_once('../partials/head.php');
                                         <h5 class="card-title">Health Status: <?php echo $pet->pet_health_status; ?></h5>
 
                                         <p class="card-text">
-                                            <?php echo $pet->pet_description; ?>
+                                            <?php echo limit_text($pet->pet_description, 4); ?>
                                         </p>
                                     </div>
                                     <div class="card-footer">
@@ -266,6 +268,7 @@ require_once('../partials/head.php');
                                     </div>
                                 </div>
                             </div>
+
                             <div class="modal fade fixed-right" id="update_image_<?php echo $pet->pet_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog  modal-lg" role="document">
                                     <div class="modal-content">
