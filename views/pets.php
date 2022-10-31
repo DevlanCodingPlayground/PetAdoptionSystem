@@ -134,24 +134,27 @@ require_once('../partials/head.php');
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-3">
                                             <label for="">Pet Type</label>
                                             <input type="text" required name="pet_type" class="form-control">
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-3">
                                             <label for="">Breed</label>
                                             <input type="text" required name="pet_breed" class="form-control">
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="">Age</label>
                                             <input type="text" required name="pet_age" class="form-control">
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="">Health Status</label>
-                                            <input type="text" required name="pet_health_status" class="form-control">
+                                            <select type="text" required name="pet_health_status" class="form-control select2bs4">
+                                                <option>Healthy</option>
+                                                <option>Ill</option>
+                                            </select>
                                         </div>
 
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="">Pet Image</label>
                                             <div class="custom-file">
                                                 <input type="file" name="pet_image" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
