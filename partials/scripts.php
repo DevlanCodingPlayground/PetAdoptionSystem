@@ -70,7 +70,11 @@ if (isset($info)) { ?>
     $('.select2bs4').select2({
         theme: 'bootstrap4'
     })
-
+    /* Show File Name */
+    $('input[type="file"]').change(function(e) {
+        var fileName = e.target.files[0].name;
+        $('.custom-file-label').html(fileName);
+    });
 
     $(document).ready(function() {
         $('.report_table').DataTable({
