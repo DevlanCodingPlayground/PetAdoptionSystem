@@ -350,7 +350,7 @@ require_once('../partials/head.php');
                                             <div class="d-flex justify-content-between">
                                                 <h5>
                                                     <b>Owner Name: </b> <?php echo $pet->pet_owner_name; ?> <br>
-                                                    <b>Contacts: </b> <?php echo $pet->pet_owner_contacts; ?>
+                                                    <b>Contacts: </b><?php echo $pet->pet_owner_contacts; ?>
                                                 </h5>
                                                 <h5>
                                                     <b>Email: </b> <?php echo $pet->pet_owner_email; ?><br>

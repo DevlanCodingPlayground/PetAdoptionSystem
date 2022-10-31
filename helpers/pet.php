@@ -138,3 +138,23 @@ if (isset($_POST['delete_pet'])) {
         $err = "Sorry.failed to delete pet.";
     }
 }
+
+
+/* Adopt Pet */
+if (isset($_POST['adopt_pet'])) {
+    $pet_adoption_pet_id = mysqli_real_escape_string($mysqli, $_POST['pet_adoption_pet_id']);
+    $pet_adoption_pet_adopter_id = mysqli_real_escape_string($mysqli, $_POST['pet_adoption_pet_adopter_id']);
+    $pet_adoption_date = mysqli_real_escape_string($mysqli, date('d M Y', strtotime($_POST['pet_adoption_date'])));
+
+    /* Persist */
+    $adopt_pet = "INSERT INTO pet_adoption(pet_adoption_pet_id, pet_adoption_pet_adopter_id, pet_adoption_date) 
+    VALUES('{$pet_adoption_pet_id}', '{$pet_adoption_pet_adopter_id}', '{$pet_adoption_date}')";
+
+    $pet_status = "UPDATE pet SET pet_adoption_status = 'Adopted' WHERE pet_id = '{$pet_adoption_pet_id}'";
+
+    if (mysqli_query($mysqli, $adopt_pet) && mysqli_query($mysqli, $pet_status)) {
+        $success = "Pet adopted";
+    } else {
+        $err =  "Failed, please try again";
+    }
+}
