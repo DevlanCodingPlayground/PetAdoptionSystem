@@ -157,7 +157,7 @@ require_once('../partials/head.php');
                                         <div class="form-group col-md-4">
                                             <label for="">Pet Image</label>
                                             <div class="custom-file">
-                                                <input type="file" name="pet_image" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                                                <input type="file" required name="pet_image" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
                                                 <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                                             </div>
                                         </div>
@@ -253,7 +253,15 @@ require_once('../partials/head.php');
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label for="">Health Status</label>
-                                                        <input type="text" required name="pet_health_status" class="form-control" value="<?php echo $pet->pet_health_status; ?>">
+                                                        <select type="text" required name="pet_health_status" class="form-control select2bs4">
+                                                            <?php if ($pet->pet_health_status == 'Healthy') { ?>
+                                                                <option>Healthy</option>
+                                                                <option>Ill</option>
+                                                            <?php } else { ?>
+                                                                <option>Ill</option>
+                                                                <option>Healthy</option>
+                                                            <?php } ?>
+                                                        </select>
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label for="">Pet description</label>
@@ -285,10 +293,12 @@ require_once('../partials/head.php');
                                                 <div class="row">
                                                     <div class="form-group col-md-12">
                                                         <label for="">Pet Image</label>
-                                                        <input type="file" required name="pet_image" class="form-control">
-                                                        <input type="hidden" name="pet_id" value="<?php echo $pet->pet_id; ?>">
+                                                        <div class="custom-file">
+                                                            <input type="hidden" name="pet_id" value="<?php echo $pet->pet_id; ?>">
+                                                            <input type="file" required name="pet_image" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                                                            <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                                        </div>
                                                     </div>
-
                                                 </div>
                                                 <div class="text-right">
                                                     <button type="submit" name="update_pet_image" class="btn btn-warning">Update Pet Image </button>
@@ -326,7 +336,7 @@ require_once('../partials/head.php');
                             <!-- End Modal -->
                             <!-- adopt modal -->
                             <div class="modal fade fixed-right" id="adopt_<?php echo $pet->pet_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog  modal-xl" role="document">
+                                <div class="modal-dialog  modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header align-items-center">
                                             <div class="text-bold">
@@ -337,11 +347,14 @@ require_once('../partials/head.php');
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <div class="text-center">
+                                            <div class="d-flex justify-content-between">
                                                 <h5>
-                                                    Pet Owner Name: <?php echo $pet->pet_owner_name; ?> <br>
-                                                    Contacts:<?php echo $pet->pet_owner_contacts; ?> <br>
-                                                    Email: <?php echo $pet->pet_owner_email; ?>
+                                                    <b>Owner Name: </b> <?php echo $pet->pet_owner_name; ?> <br>
+                                                    <b>Contacts: </b> <?php echo $pet->pet_owner_contacts; ?>
+                                                </h5>
+                                                <h5>
+                                                    <b>Email: </b> <?php echo $pet->pet_owner_email; ?><br>
+                                                    <b> Address: </b> <?php echo $pet->pet_owner_address; ?> <br>
                                                 </h5>
                                             </div>
                                             <hr>
@@ -349,7 +362,7 @@ require_once('../partials/head.php');
                                                 <div class="row">
                                                     <div class="form-group col-md-8">
                                                         <label for="">Select Pet Adopter</label>
-                                                        <select type="text" required name="pet_adoption_pet_adopter_id " class="form-control">
+                                                        <select type="text" required name="pet_adoption_pet_adopter_id " class="form-control select2bs4">
                                                             <option>Select Pet Owner</option>
                                                             <?php
                                                             $adopter_ret = "SELECT * FROM login l
