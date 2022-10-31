@@ -12,15 +12,15 @@
 <!-- OPTIONAL SCRIPTS -->
 <script src="../public/js/demo.js"></script>
 <!-- PAGE PLUGINS -->
-<!-- jQuery Mapael -->
 <script src="../public/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
 <script src="../public/plugins/raphael/raphael.min.js"></script>
 <script src="../public/plugins/jquery-mapael/jquery.mapael.min.js"></script>
 <script src="../public/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- Select2 -->
+<script src="../public/plugins/select2/js/select2.full.min.js"></script>
 <!-- ChartJS -->
 <script src="../public/plugins/chart.js/Chart.min.js"></script>
 <!-- Load Data Tables Plug Ins -->
-<!-- Data Tables CDN -->
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -65,6 +65,12 @@ if (isset($info)) { ?>
     $(document).ready(function() {
         $('.table').DataTable();
     });
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+        theme: 'bootstrap4'
+    })
+
 
     $(document).ready(function() {
         $('.report_table').DataTable({

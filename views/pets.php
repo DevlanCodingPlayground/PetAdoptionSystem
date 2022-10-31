@@ -65,76 +65,328 @@
  *
  */
 
-/* Add Pet */
-if (isset($_POST['add_pet'])) {
-    $pet_owner_id = mysqli_real_escape_string($mysqli, $_POST['pet_owner_id']);
-    $pet_type = mysqli_real_escape_string($mysqli, $_POST['pet_type']);
-    $pet_breed = mysqli_real_escape_string($mysqli, $_POST['pet_breed']);
-    $pet_age = mysqli_real_escape_string($mysqli, $_POST['pet_age']);
-    $pet_health_status = mysqli_real_escape_string($mysqli, $_POST['pet_health_status']);
-    $pet_description = mysqli_real_escape_string($mysqli, $_POST['pet_description']);
-    // $pet_adoption_staus = mysqli_real_escape_string($mysqli, $_POST['pet_adoption_status']);
+session_start();
+require_once('../config/config.php');
+require_once('../config/checklogin.php');
+require_once('../helpers/pet.php');
+require_once('../partials/head.php');
+?>
 
-    $pet_image = mysqli_real_escape_string($mysqli, $_FILES["pet_image"]["name"]);
-    $tempname = $_FILES["pet_image"]["tmp_name"];
-    $folder = "../public/img/pets/" . $pet_image;
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
 
+        <!-- Navbar -->
+        <?php require_once('../partials/navbar.php'); ?>
+        <!-- /.navbar -->
 
-    $insert_sql = "INSERT INTO pet (pet_owner_id, pet_type, pet_breed, pet_age, pet_health_status, pet_description, pet_image)
-    VALUES ('{$pet_owner_id}','{$pet_type}','{$pet_breed}','{$pet_age}','{$pet_health_status}','{$pet_description}','{$pet_image}')";
+        <!-- Main Sidebar Container -->
+        <?php require_once('../partials/sidebar.php'); ?>
 
-    if (mysqli_query($mysqli, $insert_sql) && move_uploaded_file($tempname, $folder)) {
-        $success = "Pet registered";
-    } else {
-        $err = "Failed, plese try again";
-    }
-}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">Pets</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Pets</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                    <hr>
+                    <div class="text-right">
+                        <button type="button" data-toggle="modal" data-target="#add_modal" class="btn btn-warning"> Add Pet</button>
+                    </div>
+                </div><!-- /.container-fluid -->
+                <!-- Add Pet -->
+                <div class="modal fade fixed-right" id="add_modal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog  modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header align-items-center">
+                                <div class="text-center">
+                                    <h6 class="mb-0 text-bold"> Add Pet</h6>
+                                </div>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" enctype="multipart/form-data" role="form">
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="">Pet Owner</label>
+                                            <select type="text" required name="pet_owner_id" class="form-control select2bs4">
+                                                <option>Select Pet Owner</option>
+                                                <?php
+                                                $ret = "SELECT * FROM login l
+                                                INNER JOIN pet_owner po ON po.pet_owner_login_id  = l.login_id";
+                                                $stmt = $mysqli->prepare($ret);
+                                                $stmt->execute(); //ok
+                                                $res = $stmt->get_result();
+                                                while ($user = $res->fetch_object()) {
+                                                ?>
+                                                    <option value="<?php echo $user->pet_owner_id; ?>"><?php echo $user->pet_owner_email; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Pet Type</label>
+                                            <input type="text" required name="pet_type" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Breed</label>
+                                            <input type="text" required name="pet_breed" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Age</label>
+                                            <input type="text" required name="pet_age" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Health Status</label>
+                                            <input type="text" required name="pet_health_status" class="form-control">
+                                        </div>
 
+                                        <div class="form-group col-md-6">
+                                            <label for="">Pet Image</label>
+                                            <div class="custom-file">
+                                                <input type="file" name="pet_image" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                                                <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="">Pet description</label>
+                                            <textarea type="text" required name="pet_description" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <button type="submit" name="add_pet" class="btn btn-warning">Add Pet </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Pet owner -->
+            </div>
+            <!-- /.content-header -->
 
-/* Update Pet */
-if (isset($_POST['update_pet'])) {
-    $pet_id = mysqli_real_escape_string($mysqli, $_POST['pet_id']);
-    $pet_type = mysqli_real_escape_string($mysqli, $_POST['pet_type']);
-    $pet_breed = mysqli_real_escape_string($mysqli, $_POST['pet_breed']);
-    $pet_age = mysqli_real_escape_string($mysqli, $_POST['pet_age']);
-    $pet_health_status = mysqli_real_escape_string($mysqli, $_POST['pet_health_status']);
-    $pet_description = mysqli_real_escape_string($mysqli, $_POST['pet_description']);
-    //  $pet_adoption_staus = mysqli_real_escape_string($mysqli, $_POST['pet_adoption_status']);
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-center">
+                        <form class="form-inline">
+                            <input type="text" class="form-control mb-4 mr-sm-2" placeholder="Search Pet" id="Pet_Search" onkeyup="FilterFunction()">
+                        </form>
+                    </div>
 
-    $update_sql = "UPDATE pet SET pet_type = '{$pet_type}', pet_breed = '{$pet_breed}', pet_age = '{$pet_age}', 
-    pet_health_status = '{$pet_health_status}', pet_description = '{$pet_description}' WHERE pet_id = '{$pet_id}' ";
-    if (mysqli_query($mysqli, $update_sql)) {
-        $success = "Pet updated";
-    } else {
-        $err = "Failed, please try again";
-    }
-}
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <?php
+                        $ret = "SELECT * FROM pet p INNER JOIN pet_owner po ON p.pet_owner_id = po.pet_owner_id";
+                        $stmt = $mysqli->prepare($ret);
+                        $stmt->execute(); //ok
+                        $res = $stmt->get_result();
+                        while ($pet = $res->fetch_object()) {
+                        ?>
+                            <div class="col-3 Pet_details">
+                                <div class="card ">
+                                    <img src="../public/img/pets/<?php echo $pet->pet_image; ?>" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Type: <?php echo $pet->pet_type; ?> </h5><br>
+                                        <h5 class="card-title">Breed: <?php echo $pet->pet_breed; ?></h5><br>
+                                        <h5 class="card-title">Age: <?php echo $pet->pet_age; ?></h5><br>
+                                        <h5 class="card-title">Health Status: <?php echo $pet->pet_health_status; ?></h5>
 
-/* Update Pet Images */
-if (isset($_POST['update_pet_image'])) {
-    $pet_id = mysqli_real_escape_string($mysqli, $_POST['pet_id']);
+                                        <p class="card-text">
+                                            <?php echo $pet->pet_description; ?>
+                                        </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="text-center">
+                                            <?php if ($pet->pet_adoption_status != 'Adopted') { ?>
+                                                <a data-toggle="modal" href="#adopt_<?php echo $pet->pet_id; ?>" class="badge badge-success"><i class="fas fa-hand-holding-heart"></i> Adopt</a>
+                                            <?php } ?>
+                                            <a data-toggle="modal" href="#update_<?php echo $pet->pet_id; ?>" class="badge badge-primary"><i class="fas fa-edit"></i> Edit</a>
+                                            <a data-toggle="modal" href="#update_image_<?php echo $pet->pet_id; ?>" class="badge badge-warning"><i class="fas fa-image"></i> Edit Image</a>
+                                            <a data-toggle="modal" href="#delete_<?php echo $pet->pet_id; ?>" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Update Modal -->
+                            <div class="modal fade fixed-right" id="update_<?php echo $pet->pet_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog  modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header align-items-center">
+                                            <div class="text-bold">
+                                                <h6 class="text-bold">Update Pet Details</h6>
+                                            </div>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post" enctype="multipart/form-data" role="form">
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="">Pet Type</label>
+                                                        <input type="text" required name="pet_type" class="form-control" value="<?php echo $pet->pet_type; ?>">
+                                                        <input type="hidden" name="pet_id" value="<?php echo $pet->pet_id; ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="">Breed</label>
+                                                        <input type="text" required name="pet_breed" class="form-control" value="<?php echo $pet->pet_breed; ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="">Age</label>
+                                                        <input type="text" required name="pet_age" class="form-control" value="<?php echo $pet->pet_age; ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="">Health Status</label>
+                                                        <input type="text" required name="pet_health_status" class="form-control" value="<?php echo $pet->pet_health_status; ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label for="">Pet description</label>
+                                                        <textarea type="text" required name="pet_description" class="form-control"><?php echo $pet->pet_description; ?></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="text-right">
+                                                    <button type="submit" name="update_pet" class="btn btn-warning">Update Pet </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade fixed-right" id="update_image_<?php echo $pet->pet_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog  modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header align-items-center">
+                                            <div class="text-bold">
+                                                <h6 class="text-bold">Update Pet Image</h6>
+                                            </div>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post" enctype="multipart/form-data" role="form">
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="">Pet Image</label>
+                                                        <input type="file" required name="pet_image" class="form-control">
+                                                        <input type="hidden" name="pet_id" value="<?php echo $pet->pet_id; ?>">
+                                                    </div>
 
-    $pet_image = mysqli_real_escape_string($mysqli, $_FILES["pet_image"]["name"]);
-    $tempname = $_FILES["pet_image"]["tmp_name"];
-    $folder = "../public/img/pets/" . $pet_image;
+                                                </div>
+                                                <div class="text-right">
+                                                    <button type="submit" name="update_pet_image" class="btn btn-warning">Update Pet Image </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Modal -->
 
+                            <!-- Delete Modal -->
+                            <div class="modal fade" id="delete_<?php echo $pet->pet_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">CONFIRM DELETE</h5>
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <span>&times;</span>
+                                            </button>
+                                        </div>
+                                        <form method="POST">
+                                            <div class="modal-body text-center text-danger">
+                                                <h4>Delete?</h4>
+                                                <br>
+                                                <!-- Hide This -->
+                                                <input type="hidden" name="pet_id" value="<?php echo $pet->pet_id; ?>">
+                                                <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                <input type="submit" name="delete_pet" value="Delete" class="text-center btn btn-danger">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Modal -->
+                            <!-- adopt modal -->
+                            <div class="modal fade fixed-right" id="adopt_<?php echo $pet->pet_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog  modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header align-items-center">
+                                            <div class="text-bold">
+                                                <h6 class="text-bold">Adopt this Pet</h6>
+                                            </div>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="text-center">
+                                                <h5>
+                                                    Pet Owner Name: <?php echo $pet->pet_owner_name; ?> <br>
+                                                    Contacts:<?php echo $pet->pet_owner_contacts; ?> <br>
+                                                    Email: <?php echo $pet->pet_owner_email; ?>
+                                                </h5>
+                                            </div>
+                                            <hr>
+                                            <form method="post" enctype="multipart/form-data" role="form">
+                                                <div class="row">
+                                                    <div class="form-group col-md-8">
+                                                        <label for="">Select Pet Adopter</label>
+                                                        <select type="text" required name="pet_adoption_pet_adopter_id " class="form-control">
+                                                            <option>Select Pet Owner</option>
+                                                            <?php
+                                                            $adopter_ret = "SELECT * FROM login l
+                                                             INNER JOIN pet_adopter pa ON pa.pet_adopter_login_id  = l.login_id";
+                                                            $adopter_stmt = $mysqli->prepare($adopter_ret);
+                                                            $adopter_stmt->execute(); //ok
+                                                            $adopter_res = $adopter_stmt->get_result();
+                                                            while ($adopter = $adopter_res->fetch_object()) {
+                                                            ?>
+                                                                <option value="<?php echo $adopter->pet_adopter_id; ?>"><?php echo $adopter->pet_adopter_email; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                        <input type="hidden" name="pet_adoption_pet_id " value="<?php echo $pet->pet_id; ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="">Adoption Date</label>
+                                                        <input type="date" required name="pet_adoption_date" class="form-control">
+                                                    </div>
 
-    $update_pet_image_sql = "UPDATE pet SET pet_image = '{$pet_image}' WHERE pet_id = '{$pet_id}'";
+                                                </div>
+                                                <div class="text-right">
+                                                    <button type="submit" name="adopt_pet" class="btn btn-warning">Adopt Pet </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal -->
+                        <?php } ?>
 
-    if (mysqli_query($mysqli, $update_pet_image_sql) && move_uploaded_file($tempname, $folder)) {
-        $success = "Pet image updated";
-    } else {
-        $err = "Failed, please try again";
-    }
-}
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <?php require_once('../partials/footer.php'); ?>
 
-/* Delete Pets */
-if (isset($_POST['delete_pet'])) {
-    $pet_id = mysqli_real_escape_string($mysqli, $_POST['pet_id']);
-    $delete_sql = "DELETE FROM pet WHERE pet_id = '{$pet_id}'";
-    if (mysqli_query($mysqli, $delete_sql)) {
-        $success = "Pet deleted";
-    } else {
-        $err = "Sorry.failed to delete pet.";
-    }
-}
+    </div>
+    <!-- ./wrapper -->
+
+    <?php require_once('../partials/scripts.php'); ?>
+</body>
+
+</html>
