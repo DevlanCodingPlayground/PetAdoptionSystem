@@ -61,21 +61,24 @@ if (isset($info)) { ?>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
     /* Init Data Tables */
     $(document).ready(function() {
         $('.table').DataTable();
     });
 
-    //Initialize Select2 Elements
+    /* Initialize Select2 Elements */
     $('.select2bs4').select2({
         theme: 'bootstrap4'
     })
+
     /* Show File Name */
     $('input[type="file"]').change(function(e) {
         var fileName = e.target.files[0].name;
         $('.custom-file-label').html(fileName);
     });
 
+    /* Reports Data Table */
     $(document).ready(function() {
         $('.report_table').DataTable({
             dom: 'Bfrtip',
