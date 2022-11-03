@@ -11,6 +11,8 @@
 <script src="../public/plugins/noty/noty.js"></script>
 <!-- OPTIONAL SCRIPTS -->
 <script src="../public/js/demo.js"></script>
+<!-- Mo Js -->
+<script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
 <!-- PAGE PLUGINS -->
 <script src="../public/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
 <script src="../public/plugins/raphael/raphael.min.js"></script>
@@ -32,33 +34,7 @@
 <!-- PAGE SCRIPTS -->
 <script src="../public/js/pages/dashboard2.js"></script>
 <!-- Init  Alerts -->
-<?php if (isset($success)) { ?>
-    <!-- Pop Success Alert -->
-    <script>
-        new Noty({
-            text: '<?php echo $success; ?>',
-            theme: 'nest',
-        }).show();
-    </script>
-
-<?php }
-if (isset($err)) { ?>
-    <script>
-        new Noty({
-            text: '<?php echo $err; ?>',
-            theme: 'nest',
-        }).show();
-    </script>
-<?php }
-if (isset($info)) { ?>
-    <script>
-        new Noty({
-            text: '<?php echo $info; ?>',
-            theme: 'nest',
-        }).show();
-    </script>
-<?php }
-?>
+<?php include('alerts.php'); ?>
 <script>
     // Prevent Double Resubmission
     if (window.history.replaceState) {
