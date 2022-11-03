@@ -73,7 +73,8 @@ require_once('../partials/head.php');
 ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
+    <!-- Card class -->
+    <div class="wrapper ">
 
         <!-- Navbar -->
         <?php require_once('../partials/navbar.php'); ?>
@@ -229,7 +230,6 @@ require_once('../partials/head.php');
                                             <?php if ($pet->pet_adoption_status != 'Adopted') { ?>
                                                 <a data-toggle="modal" href="#adopt_<?php echo $pet->pet_id; ?>" class="badge badge-success"><i class="fas fa-hand-holding-heart"></i> Adopt</a>
                                             <?php } ?>
-                                            <a data-toggle="modal" href="#adopt_<?php echo $pet->pet_id; ?>" class="badge badge-success"><i class="fas fa-hand-holding-heart"></i> Adopt</a>
                                             <a data-toggle="modal" href="#update_<?php echo $pet->pet_id; ?>" class="badge badge-primary"><i class="fas fa-edit"></i> Edit</a>
                                             <a data-toggle="modal" href="#update_image_<?php echo $pet->pet_id; ?>" class="badge badge-warning"><i class="fas fa-image"></i> Edit Image</a>
                                             <a data-toggle="modal" href="#delete_<?php echo $pet->pet_id; ?>" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>
