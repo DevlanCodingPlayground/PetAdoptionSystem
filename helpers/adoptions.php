@@ -84,7 +84,7 @@ if (isset($_POST['Update_Pet_Adoption'])) {
 /* Return Pet */
 if (isset($_POST['Return_Pet'])) {
     $pet_id = mysqli_real_escape_string($mysqli, $_POST['pet_id']);
-    $pet_adoption_id = mysqli_real_escape_string($msqli, $_POST['pet_adoption_id']);
+    $pet_adoption_id = mysqli_real_escape_string($mysqli, $_POST['pet_adoption_id']);
 
     /* Persist */
     $return_sql = "UPDATE pet SET pet_adoption_status = 'Available' WHERE pet_id = '{$pet_id}'";
@@ -99,8 +99,8 @@ if (isset($_POST['Return_Pet'])) {
 
 /* Add Payment */
 if (isset($_POST['Add_Payment'])) {
-    $payment_pet_adoption_id = mysqli_real_escape_string($msqli, $_POST['payment_pet_adoption_id']);
-    $payment_ref = mysqli_real_escape_string($msqli, $$paycode);
+    $payment_pet_adoption_id = mysqli_real_escape_string($mysqli, $_POST['payment_pet_adoption_id']);
+    $payment_ref = mysqli_real_escape_string($mysqli, $$paycode);
     $payment_amount = mysqli_real_escape_string($mysqli, '500');
 
     /* Persist */
@@ -118,7 +118,7 @@ if (isset($_POST['Add_Payment'])) {
 /* Delete Adoption */
 if (isset($_POST['Delete_Adoption'])) {
     $pet_id = mysqli_real_escape_string($mysqli, $_POST['pet_id']);
-    $pet_adoption_id = mysqli_real_escape_string($msqli, $_POST['pet_adoption_id']);
+    $pet_adoption_id = mysqli_real_escape_string($mysqli, $_POST['pet_adoption_id']);
 
     /* Persist */
     $pet_status_sql = "UPDATE pet SET pet_adoption_status = 'Available' WHERE pet_id = '{$pet_id}'";
