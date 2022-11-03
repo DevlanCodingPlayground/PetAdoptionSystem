@@ -211,12 +211,12 @@ require_once('../partials/head.php');
                                                     </td>
                                                     <td>
                                                         <a data-toggle="modal" href="#update_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-primary"><i class="fas fa-edit"></i> Edit</a>
-                                                        <a data-toggle="modal" href="#update_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-success"><i class="fas fa-hand-holding-usd"></i> Pay</a>
-                                                        <a data-toggle="modal" href="#update_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-warning"><i class="fas fa-reply"></i> Return </a>
+                                                        <a data-toggle="modal" href="#pay_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-success"><i class="fas fa-hand-holding-usd"></i> Pay</a>
+                                                        <a data-toggle="modal" href="#return_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-warning"><i class="fas fa-reply"></i> Return </a>
                                                         <a data-toggle="modal" href="#delete_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>
                                                     </td>
                                                     <!-- Update Modal -->
-                                                    <div class="modal fade fixed-right" id="update_<?php echo $adoptions->pet_adoption_id; ?> tabindex=" -1" role="dialog" aria-hidden="true">
+                                                    <div class="modal fade fixed-right" id="update_<?php echo $adoptions->pet_adoption_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog  modal-lg" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header align-items-center">
