@@ -96,6 +96,22 @@ if (isset($_POST['Return_Pet'])) {
 }
 
 /* Add Payment */
+if (isset($_POST['Add_Payment'])) {
+    $payment_pet_adoption_id = mysqli_real_escape_string($msqli, $_POST['payment_pet_adoption_id']);
+    $payment_ref = mysqli_real_escape_string($msqli, $$paycode);
+    $payment_amount = mysqli_real_escape_string($mysqli, '500');
+
+    /* Persist */
+    $payment_sql = "INSERT INTO payment (payment_pet_adoption_id, payment_ref, payment_amount) 
+    VALUES('{$payment_pet_adoption_id}', '{$payment_ref}', '{$payment_amount}')";
+    $adoption_sql = "UPDATE pet_adoption SET pet_adoption_payment_status = 'Paid' WHERE pet_adoption_id = '{$payment_pet_adoption_id}'";
+
+    if (mysqli_query($mysqli, $payment_sql) && mysqli_query($mysqli, $adoption_sql)) {
+        $success = "Payment Ref: $paycode Posted";
+    } else {
+        $err = "Failed, please try again";
+    }
+}
 
 /* Delete Adoption */
 if (isset($_POST['Delete_Adoption'])) {
