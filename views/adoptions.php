@@ -204,9 +204,12 @@ require_once('../partials/head.php');
                                                     <td>
                                                         Date: <?php echo date('d M Y', strtotime($adoptions->pet_adoption_date)); ?> <br>
                                                         Payment Status: <?php if ($adoptions->pet_adoption_payment_status == 'Pending') { ?>
-                                                            <span class="badge badge-danger">Pending</span>
+                                                            <span class="badge badge-danger">Pending</span> <br>
                                                         <?php } else {  ?>
-                                                            <span class="badge badge-success">Paid</span>
+                                                            <span class="badge badge-success">Paid</span> <br>
+                                                        <?php }
+                                                                        if ($adoptions->pet_adoption_return_status == 'Returned') { ?>
+                                                            <span class="badge badge-danger">Pet Returned</span> <br>
                                                         <?php } ?>
                                                     </td>
                                                     <td>
@@ -265,16 +268,18 @@ require_once('../partials/head.php');
                                                                         <h4>Delete?</h4>
                                                                         <br>
                                                                         <!-- Hide This -->
-                                                                        <input type="hidden" name="login_id" value="<?php echo $owner->login_id; ?>">
+                                                                        <input type="hidden" name="pet_id" value="<?php echo $adoptions->pet_adoption_pet_adopter_id; ?>">
+                                                                        <input type="hidden" name="pet_adoption_id" value="<?php echo $adoptions->pet_adoption_id; ?>">
                                                                         <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                        <input type="submit" name="Delete_Pet_Owner" value="Delete" class="text-center btn btn-danger">
+                                                                        <input type="submit" name="Delete_Adoption" value="Delete" class="text-center btn btn-danger">
                                                                     </div>
                                                                 </form>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <!-- End Modal -->
-                                                    <!-- Delete Modal -->
+
+                                                    <!-- Return Modal -->
                                                     <div class="modal fade" id="return_<?php echo $adoptions->pet_adoption_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
@@ -298,6 +303,10 @@ require_once('../partials/head.php');
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!-- End Modal -->
+
+                                                    <!-- Pay Modal -->
+
                                                     <!-- End Modal -->
                                                 </tr>
                                             <?php } ?>
