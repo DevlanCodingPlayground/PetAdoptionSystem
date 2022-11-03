@@ -186,6 +186,12 @@ require_once('../partials/head.php');
                                             ?>
                                                 <tr>
                                                     <td>
+                                                        Type: <?php echo $adoptions->pet_type; ?> <br>
+                                                        Breed: <?php echo $adoptions->pet_breed; ?> <br>
+                                                        Age: <?php echo $adoptions->pet_age; ?> <br>
+                                                        Health Status: <?php echo $adoptions->pet_health_status; ?>
+                                                    </td>
+                                                    <td>
                                                         Names: <?php echo $adoptions->pet_owner_name; ?> <br>
                                                         Contacts: <?php echo $adoptions->pet_owner_contacts; ?> <br>
                                                         Email: <?php echo $adoptions->pet_owner_email; ?>
@@ -197,11 +203,17 @@ require_once('../partials/head.php');
                                                     </td>
                                                     <td>
                                                         Date: <?php echo date('d M Y', strtotime($adoptions->pet_adoption_date)); ?> <br>
-                                                        Payment Status: <?php echo $adoptions->pet_owner_contacts; ?>
+                                                        Payment Status: <?php if ($adoptions->pet_adoption_payment_status == 'Pending') { ?>
+                                                            <span class="badge badge-danger">Pending</span>
+                                                        <?php } else {  ?>
+                                                            <span class="badge badge-success">Paid</span>
+                                                        <?php } ?>
                                                     </td>
                                                     <td>
-                                                        <a data-toggle="modal" href="#update_<?php echo $owner->pet_owner_id; ?>" class="badge badge-primary"><i class="fas fa-edit"></i> Edit</a>
-                                                        <a data-toggle="modal" href="#delete_<?php echo $owner->pet_owner_id; ?>" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>
+                                                        <a data-toggle="modal" href="#update_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-primary"><i class="fas fa-edit"></i> Edit</a>
+                                                        <a data-toggle="modal" href="#update_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-success"><i class="fas fa-hand-holding-usd"></i> Pay</a>
+                                                        <a data-toggle="modal" href="#update_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-warning"><i class="fas fa-reply"></i> Return </a>
+                                                        <a data-toggle="modal" href="#delete_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>
                                                     </td>
                                                     <!-- Update Modal -->
                                                     <div class="modal fade fixed-right" id="update_<?php echo $owner->pet_owner_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
