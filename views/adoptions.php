@@ -67,6 +67,7 @@
 
 session_start();
 require_once('../config/config.php');
+require_once('../config/codeGen.php');
 require_once('../config/checklogin.php');
 require_once('../helpers/adoptions.php');
 require_once('../partials/head.php');
@@ -306,7 +307,28 @@ require_once('../partials/head.php');
                                                     <!-- End Modal -->
 
                                                     <!-- Pay Modal -->
-
+                                                    <div class="modal fade" id="pay_<?php echo $adoptions->pet_adoption_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">CONFIRM PAYMENT</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal">
+                                                                        <span>&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form method="POST">
+                                                                    <div class="modal-body text-center text-danger">
+                                                                        <h4>Ksh 500 Has Been Paid For This Adoption ?</h4>
+                                                                        <br>
+                                                                        <!-- Hide This -->
+                                                                        <input type="hidden" name="payment_pet_adoption_id" value="<?php echo $adoptions->pet_adoption_id; ?>">
+                                                                        <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                                        <input type="submit" name="Add_Payment" value="Yes" class="text-center btn btn-danger">
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <!-- End Modal -->
                                                 </tr>
                                             <?php } ?>

@@ -100,7 +100,7 @@ if (isset($_POST['Return_Pet'])) {
 /* Add Payment */
 if (isset($_POST['Add_Payment'])) {
     $payment_pet_adoption_id = mysqli_real_escape_string($mysqli, $_POST['payment_pet_adoption_id']);
-    $payment_ref = mysqli_real_escape_string($mysqli, $$paycode);
+    $payment_ref = mysqli_real_escape_string($mysqli, $paycode);
     $payment_amount = mysqli_real_escape_string($mysqli, '500');
 
     /* Persist */
