@@ -7,8 +7,8 @@
 <script src="../public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../public/js/adminlte.js"></script>
-<!-- Toastr -->
-<script src="../public/plugins/toastr/toastr.min.js"></script>
+<!-- Noty -->
+<script src="../public/plugins/noty/noty.js"></script>
 <!-- OPTIONAL SCRIPTS -->
 <script src="../public/js/demo.js"></script>
 <!-- PAGE PLUGINS -->
@@ -35,18 +35,27 @@
 <?php if (isset($success)) { ?>
     <!-- Pop Success Alert -->
     <script>
-        toastr.success('<?php echo $success; ?>')
+        new Noty({
+            text: '<?php echo $success; ?>',
+            theme: 'nest',
+        }).show();
     </script>
 
 <?php }
 if (isset($err)) { ?>
     <script>
-        toastr.error('<?php echo $err; ?>')
+        new Noty({
+            text: '<?php echo $err; ?>',
+            theme: 'nest',
+        }).show();
     </script>
 <?php }
 if (isset($info)) { ?>
     <script>
-        toastr.warning('<?php echo $info; ?>')
+        new Noty({
+            text: '<?php echo $info; ?>',
+            theme: 'nest',
+        }).show();
     </script>
 <?php }
 ?>
