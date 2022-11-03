@@ -95,6 +95,20 @@ if (isset($_POST['Return_Pet'])) {
     }
 }
 
- /* Add Payment */
+/* Add Payment */
 
- /* Delete Adoption */
+/* Delete Adoption */
+if (isset($_POST['Delete_Adoption'])) {
+    $pet_id = mysqli_real_escape_string($mysqli, $_POST['pet_id']);
+    $pet_adoption_id = mysqli_real_escape_string($msqli, $_POST['pet_adoption_id']);
+
+    /* Persist */
+    $pet_status_sql = "UPDATE pet SET pet_adoption_status = 'Available' WHERE pet_id = '{$pet_id}'";
+    $delete_adoption_sql = "DELETE FROM pet_adoption WHERE pet_adoption_id = '{$pet_adoption_id}'";
+
+    if (mysqli_query($mysqli, $pet_status_sql) && mysqli_query($mysqli, $delete_adoption_sql)) {
+        $success = "Pet adoption deleted";
+    } else {
+        $err = "Failed, please try again";
+    }
+}
