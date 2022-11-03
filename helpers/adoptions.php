@@ -68,8 +68,8 @@
 
 /* Update Adoption */
 if (isset($_POST['Update_Pet_Adoption'])) {
-    $pet_adoption_id = mysqli_real_escape_string($msqli, $_POST['pet_adoption_id']);
-    $pet_adoption_date = mysqli_real_escape_string($msqli, $_POST['pet_adoption_date']);
+    $pet_adoption_id = mysqli_real_escape_string($mysqli, $_POST['pet_adoption_id']);
+    $pet_adoption_date = mysqli_real_escape_string($mysqli, $_POST['pet_adoption_date']);
 
     /* Persist */
     $update_sql = "UPDATE pet_adoption SET pet_adoption_date = '{$pet_adoption_date}' WHERE pet_adoption_id = '{$pet_adoption_id}'";
