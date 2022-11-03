@@ -216,12 +216,12 @@ require_once('../partials/head.php');
                                                         <a data-toggle="modal" href="#delete_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>
                                                     </td>
                                                     <!-- Update Modal -->
-                                                    <div class="modal fade fixed-right" id="update_<?php echo $owner->pet_owner_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                                        <div class="modal-dialog  modal-xl" role="document">
+                                                    <div class="modal fade fixed-right" id="update_<?php echo $adoptions->pet_adoption_id; ?> tabindex=" -1" role="dialog" aria-hidden="true">
+                                                        <div class="modal-dialog  modal-lg" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header align-items-center">
                                                                     <div class="text-bold">
-                                                                        <h6 class="text-bold">Update <?php echo $owner->pet_owner_name; ?> Account</h6>
+                                                                        <h6 class="text-bold">Update Pet Adoption Date</h6>
                                                                     </div>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -230,26 +230,14 @@ require_once('../partials/head.php');
                                                                 <div class="modal-body">
                                                                     <form method="post" enctype="multipart/form-data" role="form">
                                                                         <div class="row">
-                                                                            <div class="form-group col-md-6">
-                                                                                <label for="">Full Names</label>
-                                                                                <input type="hidden" required name="pet_owner_id" value="<?php echo $owner->pet_owner_id; ?>" class="form-control">
-                                                                                <input type="text" required name="pet_owner_name" value="<?php echo $owner->pet_owner_name; ?>" class="form-control">
-                                                                            </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label for="">Email Address</label>
-                                                                                <input type="email" required name="pet_owner_email" value="<?php echo $owner->pet_owner_email; ?>" class="form-control">
-                                                                            </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label for="">Phone Number</label>
-                                                                                <input type="text" required name="pet_owner_contacts" value="<?php echo $owner->pet_owner_contacts; ?>" class="form-control">
-                                                                            </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label for="">Address</label>
-                                                                                <input type="text" required name="pet_owner_address" value="<?php echo $owner->pet_owner_address; ?>" class="form-control">
+                                                                            <div class="form-group col-md-12">
+                                                                                <label for="">Adoption date</label>
+                                                                                <input type="hidden" required name="pet_adoption_id" value="<?php echo $adoptions->pet_adoption_id; ?>" class="form-control">
+                                                                                <input type="date" required name="pet_adoption_date" value="<?php echo $adoptions->pet_adoption_date; ?>" class="form-control">
                                                                             </div>
                                                                         </div>
                                                                         <div class="text-right">
-                                                                            <button type="submit" name="Update_Pet_Owner" class="btn btn-warning">Update Pet Owner</button>
+                                                                            <button type="submit" name="Update_Pet_Adoption" class="btn btn-warning">Update</button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
