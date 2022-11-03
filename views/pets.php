@@ -212,7 +212,7 @@ require_once('../partials/head.php');
                                         </div>
                                     <?php } ?>
                                     <div class="card-img-top">
-                                        <img src="../public/img/pets/<?php echo $pet->pet_image; ?>" class="card-img-top" alt="...">
+                                        <img src="../public/img/pets/<?php echo $pet->pet_image; ?>" class="card-img-top pet_image" alt="...">
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">Type: <?php echo $pet->pet_type; ?> </h5><br>
@@ -229,6 +229,7 @@ require_once('../partials/head.php');
                                             <?php if ($pet->pet_adoption_status != 'Adopted') { ?>
                                                 <a data-toggle="modal" href="#adopt_<?php echo $pet->pet_id; ?>" class="badge badge-success"><i class="fas fa-hand-holding-heart"></i> Adopt</a>
                                             <?php } ?>
+                                            <a data-toggle="modal" href="#adopt_<?php echo $pet->pet_id; ?>" class="badge badge-success"><i class="fas fa-hand-holding-heart"></i> Adopt</a>
                                             <a data-toggle="modal" href="#update_<?php echo $pet->pet_id; ?>" class="badge badge-primary"><i class="fas fa-edit"></i> Edit</a>
                                             <a data-toggle="modal" href="#update_image_<?php echo $pet->pet_id; ?>" class="badge badge-warning"><i class="fas fa-image"></i> Edit Image</a>
                                             <a data-toggle="modal" href="#delete_<?php echo $pet->pet_id; ?>" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>

@@ -33,6 +33,8 @@
 
 <!-- PAGE SCRIPTS -->
 <script src="../public/js/pages/dashboard2.js"></script>
+<!-- Boxlight -->
+<script type="text/javascript" src="../public/plugins/boxlight/jquery.blImageCenter.js"></script>
 <!-- Init  Alerts -->
 <?php include('alerts.php'); ?>
 <script>
@@ -42,6 +44,8 @@
     }
 </script>
 <script>
+    /* Invoke Boxlight */
+    $('.pet_image').centerImage();
     /* Init Tool Tip Js */
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
