@@ -211,8 +211,12 @@ require_once('../partials/head.php');
                                                     </td>
                                                     <td>
                                                         <a data-toggle="modal" href="#update_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-primary"><i class="fas fa-edit"></i> Edit</a>
-                                                        <a data-toggle="modal" href="#pay_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-success"><i class="fas fa-hand-holding-usd"></i> Pay</a>
-                                                        <a data-toggle="modal" href="#return_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-warning"><i class="fas fa-reply"></i> Return </a>
+                                                        <?php if ($adoptions->pet_adoption_payment_status == 'Pending') { ?>
+                                                            <a data-toggle="modal" href="#pay_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-success"><i class="fas fa-hand-holding-usd"></i> Pay</a>
+                                                        <?php }
+                                                        if ($adoptions->pet_adoption_return_status != 'Returned') { ?>
+                                                            <a data-toggle="modal" href="#return_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-warning"><i class="fas fa-reply"></i> Return </a>
+                                                        <?php } ?>
                                                         <a data-toggle="modal" href="#delete_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>
                                                     </td>
                                                     <!-- Update Modal -->
@@ -247,7 +251,7 @@ require_once('../partials/head.php');
                                                     <!-- End Modal -->
 
                                                     <!-- Delete Modal -->
-                                                    <div class="modal fade" id="delete_<?php echo $owner->pet_owner_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="delete_<?php echo $adoptions->pet_adoption_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -264,6 +268,31 @@ require_once('../partials/head.php');
                                                                         <input type="hidden" name="login_id" value="<?php echo $owner->login_id; ?>">
                                                                         <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
                                                                         <input type="submit" name="Delete_Pet_Owner" value="Delete" class="text-center btn btn-danger">
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Modal -->
+                                                    <!-- Delete Modal -->
+                                                    <div class="modal fade" id="return_<?php echo $adoptions->pet_adoption_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">CONFIRM RETURN</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal">
+                                                                        <span>&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form method="POST">
+                                                                    <div class="modal-body text-center text-danger">
+                                                                        <h4>Return This Pet?</h4>
+                                                                        <br>
+                                                                        <!-- Hide This -->
+                                                                        <input type="hidden" name="pet_id" value="<?php echo $adoptions->pet_adoption_pet_adopter_id; ?>">
+                                                                        <input type="hidden" name="pet_adoption_id" value="<?php echo $adoptions->pet_adoption_id; ?>">
+                                                                        <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                                        <input type="submit" name="Return_Pet" value="Return Pet" class="text-center btn btn-danger">
                                                                     </div>
                                                                 </form>
                                                             </div>

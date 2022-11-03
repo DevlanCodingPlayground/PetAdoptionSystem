@@ -84,11 +84,13 @@ if (isset($_POST['Update_Pet_Adoption'])) {
 /* Return Pet */
 if (isset($_POST['Return_Pet'])) {
     $pet_id = mysqli_real_escape_string($mysqli, $_POST['pet_id']);
+    $pet_adoption_id = mysqli_real_escape_string($msqli, $_POST['pet_adoption_id']);
 
     /* Persist */
     $return_sql = "UPDATE pet SET pet_adoption_status = 'Available' WHERE pet_id = '{$pet_id}'";
+    $adoption_sql = "UPDATE pet_adoption SET pet_adoption_return_status = 'Returned' WHERE pet_adoption_id = '{$pet_adoption_id}'";
 
-    if (mysqli_query($mysqli, $return_sql)) {
+    if (mysqli_query($mysqli, $return_sql) && mysqli_query($mysqli, $adoption_sql)) {
         $success = "Pet returned";
     } else {
         $err = "Failed, please try again";
