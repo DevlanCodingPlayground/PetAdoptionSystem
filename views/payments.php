@@ -166,7 +166,7 @@ require_once('../partials/head.php');
                                                                         <input type="hidden" name="payment_id" value="<?php echo $payment->payment_id; ?>">
                                                                         <input type="hidden" name="payment_pet_adoption_id" value="<?php echo $payment->payment_id; ?>">
                                                                         <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                        <input type="submit" name="Delete_Pet_Adopters" value="Delete" class="text-center btn btn-danger">
+                                                                        <input type="submit" name="Roll_Back_Payment" value="Delete" class="text-center btn btn-danger">
                                                                     </div>
                                                                 </form>
                                                             </div>
