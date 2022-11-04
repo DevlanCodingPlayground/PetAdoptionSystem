@@ -68,7 +68,7 @@
 session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
-require_once('../helpers/pet_adopters.php');
+require_once('../helpers/payments.php');
 require_once('../partials/head.php');
 ?>
 
@@ -164,7 +164,7 @@ require_once('../partials/head.php');
                                                                         <br>
                                                                         <!-- Hide This -->
                                                                         <input type="hidden" name="payment_id" value="<?php echo $payment->payment_id; ?>">
-                                                                        <input type="hidden" name="payment_pet_adoption_id" value="<?php echo $payment->payment_id; ?>">
+                                                                        <input type="hidden" name="payment_pet_adoption_id" value="<?php echo $payment->payment_pet_adoption_id; ?>">
                                                                         <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
                                                                         <input type="submit" name="Roll_Back_Payment" value="Delete" class="text-center btn btn-danger">
                                                                     </div>

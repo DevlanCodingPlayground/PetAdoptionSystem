@@ -75,7 +75,7 @@ if (isset($_POST['Roll_Back_Payment'])) {
     $roll_back_sql = "DELETE FROM payment WHERE payment_id = '{$payment_id}'";
     $roll_back_adoption = "UPDATE pet_adoption SET pet_adoption_payment_status = 'Pending' WHERE pet_adoption_id = '{$payment_pet_adoption_id}'";
 
-    if (mysqli_query($mysqli, $roll_back_adoption) && mysqli_query($mysqli, $roll_back_adoption)) {
+    if (mysqli_query($mysqli, $roll_back_sql) && mysqli_query($mysqli, $roll_back_adoption)) {
         $success = "Payment rolled back";
     } else {
         $err = "Roll back failed";
