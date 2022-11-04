@@ -124,8 +124,8 @@ require_once('../partials/head.php');
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $ret = "SELECT * FROM payment p
-                                            INNER JOIN pet_adoption pa ON p.payment_id = pa.payment_pet_adoption_id
+                                            $ret = "SELECT * FROM payment pay 
+                                            INNER JOIN pet_adoption pa ON pa.pet_adoption_id = pay.payment_pet_adoption_id 
                                             INNER JOIN pet p ON p.pet_id = pa.pet_adoption_pet_id 
                                             INNER JOIN pet_owner po ON po.pet_owner_id = p.pet_owner_id 
                                             INNER JOIN pet_adopter pad ON pad.pet_adopter_id = pa.pet_adoption_pet_adopter_id";
@@ -136,7 +136,11 @@ require_once('../partials/head.php');
                                             ?>
                                                 <tr>
                                                     <td><?php echo $payment->payment_ref; ?></td>
-                                                    <td><?php echo $payment->pet_adoption_ref; ?></td>
+                                                    <td>
+                                                        <a data-toggle="modal" href="#adoption_<?php echo $payment->payment_pet_adoption_id; ?>">
+                                                            <?php echo $payment->pet_adoption_ref; ?>
+                                                        </a>
+                                                    </td>
                                                     <td>Ksh <?php echo number_format($payment->payment_amount); ?></td>
                                                     <td><?php echo date('d M Y g:ia', strtotime($payment->payment_date)); ?></td>
                                                     <td><?php echo $payment->payment_means; ?></td>
@@ -160,10 +164,42 @@ require_once('../partials/head.php');
                                                                         <br>
                                                                         <!-- Hide This -->
                                                                         <input type="hidden" name="payment_id" value="<?php echo $payment->payment_id; ?>">
+                                                                        <input type="hidden" name="payment_pet_adoption_id" value="<?php echo $payment->payment_id; ?>">
                                                                         <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
                                                                         <input type="submit" name="Delete_Pet_Adopters" value="Delete" class="text-center btn btn-danger">
                                                                     </div>
                                                                 </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Modal -->
+
+                                                    <!-- Persist Payment Details -->
+                                                    <div class="modal fade" id="adoption_<?php echo $payment->payment_pet_adoption_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Adoption Details</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal">
+                                                                        <span>&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <h5>
+                                                                            <b>Pet Breed: </b> <?php echo $payment->pet_breed; ?> <br>
+                                                                            <b>Pet Age: </b><?php echo $payment->pet_age; ?>
+                                                                        </h5>
+                                                                        <h5>
+                                                                            <b>Date Adopted: </b> <?php echo $payment->pet_adoption_date; ?><br>
+                                                                            <b>Adopter Name: </b> <?php echo $payment->pet_adopter_name; ?> <br>
+                                                                        </h5>
+                                                                        <h5>
+                                                                            <b>Adopter Email: </b> <?php echo $payment->pet_adopter_email; ?><br>
+                                                                            <b>Adopter Contacts: </b> <?php echo $payment->pet_adopter_phone_number; ?> <br>
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
