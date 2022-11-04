@@ -95,31 +95,34 @@ if (isset($_GET['status'])) {
             if ($amountPaid >= $amountToPay) {
 
                 /* Insert This Payment Details To Payment*/
-                $payment_txn_code = $res->data->tx_ref;
-                $payment_amount = $amountPaid;
+                $payment_ref = mysqli_real_escape_string($mysqli, $res->data->tx_ref);
+                $payment_amount = mysqli_real_escape_string($mysqli, $amountPaid);
+                $payment_pet_adoption_id = mysqli_real_escape_string($mysqli, $_GET['adoption']);
+                $payment_means = "Credit / Debit Cards";
+
+                $payment_sql = "INSERT INTO payment (payment_pet_adoption_id, payment_ref, payment_amount, payment_means) 
+                VALUES('{$payment_pet_adoption_id}', '{$payment_ref}', '{$payment_amount}', '{$payment_means}')";
+                $adoption_sql = "UPDATE pet_adoption SET pet_adoption_payment_status = 'Paid' WHERE pet_adoption_id = '{$payment_pet_adoption_id}'";
 
 
-
-
-
-                if ($prepare && $room_prepare) {
+                if (mysqli_query($mysqli, $payment_sql) && mysqli_query($mysqli, $adoption_sql)) {
                     /* Redirect To Rooms And Show Alert */
                     $_SESSION['success'] = 'Room Reserved';
-                    header('Location: rooms');
+                    header('Location: adoptions');
                     exit;
                 } else {
                     $_SESSION['err'] = 'Failed To Persist Transaction Details';
-                    header('Location: rooms');
+                    header('Location: adoptions');
                     exit;
                 }
             } else {
                 $_SESSION['err'] = 'We Are Having Problem Processing Your Payment';
-                header('Location: rooms');
+                header('Location: adoptions');
                 exit;
             }
         } else {
             $_SESSION['err'] = 'Can Not Process Payment, Please Use MPESA Payment Method';
-            header('Location: rooms');
+            header('Location: adoptions');
             exit;
         }
     }
