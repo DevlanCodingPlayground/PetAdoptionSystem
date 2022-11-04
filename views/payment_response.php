@@ -107,7 +107,7 @@ if (isset($_GET['status'])) {
 
                 if (mysqli_query($mysqli, $payment_sql) && mysqli_query($mysqli, $adoption_sql)) {
                     /* Redirect To Rooms And Show Alert */
-                    $_SESSION['success'] = 'Credit Card Payment Ref: ' . $paycode . ' Posted';
+                    $_SESSION['success'] = 'Credit Card Payment Ref: ' . $payment_ref . ' Posted';
                     header('Location: adoptions');
                     exit;
                 } else {
