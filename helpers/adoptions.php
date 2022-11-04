@@ -105,8 +105,8 @@ if (isset($_POST['Add_Payment'])) {
     $payment_means  = mysqli_real_escape_string($mysqli, $_POST['payment_means']);
 
     /* Rave Payment Variables */
-    $adopter_name = mysqli_real_escape_string($mysqli, $_POST['pet_adopter_name']);
-    $adopter_email = mysqli_real_escape_string($mysqli, $_POST['pet_adopter_email']);
+    $pet_adopter_name = mysqli_real_escape_string($mysqli, $_POST['pet_adopter_name']);
+    $pet_adopter_email = mysqli_real_escape_string($mysqli, $_POST['pet_adopter_email']);
 
     if ($payment_means == 'Cash') {
         /* Persist */
@@ -128,17 +128,17 @@ if (isset($_POST['Add_Payment'])) {
             'currency' => 'KES',
             'payment_options' => 'card',
             /* Update This URL To Match Your Needs */
-            'redirect_url' => 'http://127.0.0.1/iPet/views/payment_response?adoption=' . $payment_pet_adoption_id,
+            'redirect_url' => 'http://127.0.0.1/iPet/views/payment_response.php?adoption=' . $payment_pet_adoption_id,
             'customer' => [
-                'email' => $adopter_email,
-                'name' => $adopter_name,
+                'email' => $pet_adopter_email,
+                'name' => $pet_adopter_name,
             ],
             'meta' => [
                 'price' => $payment_amount
             ],
             'customizations' => [
                 'title' => 'Pet Adoption Payment',
-                'description' => $adopter_name . 'Pet Adoption Payment'
+                'description' => $pet_adopter_name . 'Pet Adoption Payment'
             ]
         ];
 

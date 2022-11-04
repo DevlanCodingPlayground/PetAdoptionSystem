@@ -90,69 +90,17 @@ require_once('../partials/head.php');
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Pet Owners</h1>
+                            <h1 class="m-0 text-dark">Pet Adoptions</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Pet Owners</li>
+                                <li class="breadcrumb-item active">Pet Adoptions</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                     <hr>
-                    <div class="text-right">
-                        <button type="button" data-toggle="modal" data-target="#add_modal" class="btn btn-warning"> Add Pet Owner</button>
-                    </div>
                 </div><!-- /.container-fluid -->
-                <!-- Add Staff -->
-                <div class="modal fade fixed-right" id="add_modal" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog  modal-xl" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header align-items-center">
-                                <div class="text-center">
-                                    <h6 class="mb-0 text-bold"> Add Pet Owner</h6>
-                                </div>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post" enctype="multipart/form-data" role="form">
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label for="">Full Names</label>
-                                            <input type="text" required name="pet_owner_name" class="form-control">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="">Email Address</label>
-                                            <input type="email" required name="pet_owner_email" class="form-control">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="">Phone Number</label>
-                                            <input type="text" required name="pet_owner_contacts" class="form-control">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="">Address</label>
-                                            <input type="text" required name="pet_owner_address" class="form-control">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="">Login Username</label>
-                                            <input type="text" required name="login_username" class="form-control">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="">Login Password</label>
-                                            <input type="password" required name="login_password" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <button type="submit" name="Add_Pet_Owner" class="btn btn-warning">Add Pet Owner</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Staff -->
             </div>
             <!-- /.content-header -->
 
@@ -176,10 +124,10 @@ require_once('../partials/head.php');
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $ret = "SELECT * FROM pet_adoption pa
-                                            INNER JOIN pet_adopter pad ON pad.pet_adopter_id = pa.pet_adoption_pet_adopter_id
-                                            INNER JOIN pet p ON p.pet_id = pa.pet_adoption_id
-                                            INNER JOIN pet_owner po ON po.pet_owner_id = p.pet_owner_id";
+                                            $ret = "SELECT * FROM pet_adoption pa 
+                                            INNER JOIN pet p ON p.pet_id = pa.pet_adoption_pet_id 
+                                            INNER JOIN pet_owner po ON po.pet_owner_id = p.pet_owner_id 
+                                            INNER JOIN pet_adopter pad ON pad.pet_adopter_id = pa.pet_adoption_pet_adopter_id";
                                             $stmt = $mysqli->prepare($ret);
                                             $stmt->execute(); //ok
                                             $res = $stmt->get_result();
@@ -330,7 +278,11 @@ require_once('../partials/head.php');
                                                                             </select>
                                                                         </div>
                                                                         <div class="text-center text-danger">
+                                                                            <!-- Hidden Values -->
                                                                             <input type="hidden" name="payment_pet_adoption_id" value="<?php echo $adoptions->pet_adoption_id; ?>">
+                                                                            <input type="hidden" name="pet_adopter_name" value="<?php echo $adoptions->pet_adopter_name; ?>">
+                                                                            <input type="hidden" name="pet_adopter_email" value="<?php echo $adoptions->pet_adopter_email; ?>">
+
                                                                             <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
                                                                             <input type="submit" name="Add_Payment" value="Yes, Pay" class="text-center btn btn-danger">
                                                                         </div>
