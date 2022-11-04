@@ -101,7 +101,7 @@ $stmt->close();
 
 
 /* Available Pets */
-$query = "SELECT COUNT(*)  FROM pet WHERE pet_adoption_status = 'Pending' ";
+$query = "SELECT COUNT(*)  FROM pet WHERE pet_adoption_status = 'Available' ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($available_pets);

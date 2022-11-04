@@ -68,6 +68,7 @@
 session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
+require_once('../config/codeGen.php');
 require_once('../helpers/pet.php');
 require_once('../partials/head.php');
 ?>
@@ -377,7 +378,7 @@ require_once('../partials/head.php');
                                                     <div class="form-group col-md-8">
                                                         <label for="">Select Pet Adopter</label>
                                                         <select type="text" required name="pet_adoption_pet_adopter_id" class="form-control select2bs4">
-                                                            <option>Select Pet Owner</option>
+                                                            <option>Select Pet Adopter</option>
                                                             <?php
                                                             $adopter_ret = "SELECT * FROM login l
                                                              INNER JOIN pet_adopter pa ON pa.pet_adopter_login_id  = l.login_id";

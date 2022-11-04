@@ -180,7 +180,7 @@ require_once('../partials/head.php');
                             <!-- small box -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>Ksh <?php echo number_format($payment_amount, 2); ?></h3>
+                                    <h3>Ksh <?php echo number_format($payment_amount); ?></h3>
                                     <p>Payments</p>
                                 </div>
                                 <div class="icon">

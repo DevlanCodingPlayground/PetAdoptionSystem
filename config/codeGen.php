@@ -86,7 +86,7 @@ $length = 12;
 $checksum = bin2hex(random_bytes($length));
 
 // ---Codes----------------------------------------------------------------//
-$alpha = 1;
+$alpha = 3;
 $beta = 4;
 $a = substr(str_shuffle("QWERTYUIOPLKJHGFDSAZXCVBNM"), 1, $alpha);
 $b = substr(str_shuffle("1234567890"), 1, $beta);
@@ -97,6 +97,8 @@ $paycode = substr(str_shuffle("QWERTYUIOPLKJHGFDSAZXCVBNM1234567890"), 1, $alpha
 /* System Admin Default Password */
 $length = 8;
 $defaultPass = substr(str_shuffle("QWERTYUIOPwertyuioplkjLKJHGFDSAZXCVBNM1234567890qhgfdsazxcvbnm"), 1, $length);
+
+
 
 
 /* System Generated ID */
