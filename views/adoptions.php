@@ -317,13 +317,23 @@ require_once('../partials/head.php');
                                                                     </button>
                                                                 </div>
                                                                 <form method="POST">
-                                                                    <div class="modal-body text-center text-danger">
-                                                                        <h4>Ksh 500 Has Been Paid For This Adoption ?</h4>
+                                                                    <div class="modal-body">
+                                                                        <h4 class="text-center text-danger">Pay KSH 500 For this adoption ?</h4>
                                                                         <br>
                                                                         <!-- Hide This -->
-                                                                        <input type="hidden" name="payment_pet_adoption_id" value="<?php echo $adoptions->pet_adoption_id; ?>">
-                                                                        <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                        <input type="submit" name="Add_Payment" value="Yes" class="text-center btn btn-danger">
+                                                                        <div class="form-group col-md-12">
+                                                                            <label for="">Payment means</label>
+                                                                            <select type="text" required name="payment_means" class="form-control select2bs4">
+                                                                                <option>Cash</option>
+                                                                                <option>Credit / Debit Card</option>
+                                                                                <option>Mobile Payment</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="text-center text-danger">
+                                                                            <input type="hidden" name="payment_pet_adoption_id" value="<?php echo $adoptions->pet_adoption_id; ?>">
+                                                                            <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                                            <input type="submit" name="Add_Payment" value="Yes, Pay" class="text-center btn btn-danger">
+                                                                        </div>
                                                                     </div>
                                                                 </form>
                                                             </div>

@@ -102,16 +102,78 @@ if (isset($_POST['Add_Payment'])) {
     $payment_pet_adoption_id = mysqli_real_escape_string($mysqli, $_POST['payment_pet_adoption_id']);
     $payment_ref = mysqli_real_escape_string($mysqli, $paycode);
     $payment_amount = mysqli_real_escape_string($mysqli, '500');
+    $payment_means  = mysqli_real_escape_string($mysqli, $_POST['payment_means']);
 
-    /* Persist */
-    $payment_sql = "INSERT INTO payment (payment_pet_adoption_id, payment_ref, payment_amount) 
-    VALUES('{$payment_pet_adoption_id}', '{$payment_ref}', '{$payment_amount}')";
-    $adoption_sql = "UPDATE pet_adoption SET pet_adoption_payment_status = 'Paid' WHERE pet_adoption_id = '{$payment_pet_adoption_id}'";
+    /* Rave Payment Variables */
+    $adopter_name = mysqli_real_escape_string($mysqli, $_POST['pet_adopter_name']);
+    $adopter_email = mysqli_real_escape_string($mysqli, $_POST['pet_adopter_email']);
 
-    if (mysqli_query($mysqli, $payment_sql) && mysqli_query($mysqli, $adoption_sql)) {
-        $success = "Payment Ref: $paycode Posted";
+    if ($payment_means == 'Cash') {
+        /* Persist */
+        $payment_sql = "INSERT INTO payment (payment_pet_adoption_id, payment_ref, payment_amount, payment_means) 
+        VALUES('{$payment_pet_adoption_id}', '{$payment_ref}', '{$payment_amount}', '{$payment_means}')";
+        $adoption_sql = "UPDATE pet_adoption SET pet_adoption_payment_status = 'Paid' WHERE pet_adoption_id = '{$payment_pet_adoption_id}'";
+
+        if (mysqli_query($mysqli, $payment_sql) && mysqli_query($mysqli, $adoption_sql)) {
+            $success = "Cash Payment Ref: $paycode Posted";
+        } else {
+            $err = "Failed, please try again";
+        }
+    } else if ($payment_means == 'Credit / Debit Card') {
+        /* Handle Credit/Debit Card - To Avoid Messy Codebases Just Include The File Here */
+
+        $request = [
+            'tx_ref' => $payment_ref,
+            'amount' => $payment_amount,
+            'currency' => 'KES',
+            'payment_options' => 'card',
+            /* Update This URL To Match Your Needs */
+            'redirect_url' => 'http://127.0.0.1/iPet/views/payment_response?adoption=' . $payment_pet_adoption_id,
+            'customer' => [
+                'email' => $adopter_email,
+                'name' => $adopter_name,
+            ],
+            'meta' => [
+                'price' => $payment_amount
+            ],
+            'customizations' => [
+                'title' => 'Pet Adoption Payment',
+                'description' => $adopter_name . 'Pet Adoption Payment'
+            ]
+        ];
+
+        /* Call Flutterwave Endpoint */
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.flutterwave.com/v3/payments',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => json_encode($request),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer FLWSECK_TEST-a90855faf858298f0b14bfb4621e53fe-X', /* To Do : Never hard code this bearer */
+                'Content-Type: application/json'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        $res = json_decode($response);
+        if ($res->status == 'success') {
+            $link = $res->data->link;
+            header('Location: ' . $link);
+        } else {
+            $err =  'We can not process your payment';
+        }
     } else {
-        $err = "Failed, please try again";
+        /* Handle Mobile Payments - To Avoid Messy Codebases Just Include The File Here */
     }
 }
 
