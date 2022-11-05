@@ -384,7 +384,7 @@ if ($_GET['module'] == 'Pets') {
     echo $excelData;
 
     exit;
-} else if ($_GET['module'] == 'Payment') {
+} else if ($_GET['module'] == 'Payments') {
     /* Get Payment Reports */
     function filterData(&$str)
     {
@@ -396,7 +396,7 @@ if ($_GET['module'] == 'Pets') {
     }
 
     /* Excel File Name */
-    $fileName = 'Pet Adoptions.xls';
+    $fileName = 'Pet Adoptions Payments.xls';
 
     /* Excel Column Name */
     $fields = array(
@@ -440,7 +440,7 @@ if ($_GET['module'] == 'Pets') {
                 $cnt,
                 $row['payment_ref'],
                 $row['payment_amount'],
-                date('d M Y', strtotime($row['payment_date'])),
+                date('d M Y g:ia', strtotime($row['payment_date'])),
                 $row['payment_means'],
                 $row['pet_adoption_ref'],
                 date('d M Y', strtotime($row['pet_adoption_date'])),

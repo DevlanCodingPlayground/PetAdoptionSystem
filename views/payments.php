@@ -99,6 +99,9 @@ require_once('../partials/head.php');
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                     <hr>
+                    <div class="text-right">
+                        <a href="generate_reports?module=Payments" class="btn btn-primary">Download Adoption Payments</a>
+                    </div>
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
