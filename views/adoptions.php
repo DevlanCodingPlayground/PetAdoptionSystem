@@ -100,6 +100,9 @@ require_once('../partials/head.php');
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                     <hr>
+                    <div class="text-right">
+                        <a href="generate_reports?module=Adoptions" class="btn btn-primary">Download Adoptions</a>
+                    </div>
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
