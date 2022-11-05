@@ -138,7 +138,7 @@ if ($_GET['module'] == 'Pets') {
     echo $excelData;
 
     exit;
-} else if ($_GET['module' == 'Staffs']) {
+} else if ($_GET['module'] == 'Staffs') {
     /* Get Staffs Details Report */
     function filterData(&$str)
     {
@@ -172,7 +172,7 @@ if ($_GET['module'] == 'Pets') {
             $lineData = array(
                 $cnt,
                 $row['admin_name'],
-                $row['admin_login_username'],
+                $row['login_username'],
             );
             $cnt = $cnt + 1;
             array_walk($lineData, 'filterData');
