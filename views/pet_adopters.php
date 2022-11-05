@@ -100,6 +100,7 @@ require_once('../partials/head.php');
                     </div><!-- /.row -->
                     <hr>
                     <div class="text-right">
+                        <a href="generate_reports?module=Pet_Adopters" class="btn btn-primary">Download Pet Adopters</a>
                         <button type="button" data-toggle="modal" data-target="#add_modal" class="btn btn-warning"> Add Pet Adopter</button>
                     </div>
                 </div><!-- /.container-fluid -->

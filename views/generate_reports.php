@@ -246,8 +246,63 @@ if ($_GET['module'] == 'Pets') {
     echo $excelData;
 
     exit;
-} else if ($_GET['module'] == '') {
-    /* Adoptions */
+} else if ($_GET['module'] == 'Pet_Adopters') {
+    /* Pet Adopters */
+    /* Pet Owners Details Report */
+    function filterData(&$str)
+    {
+        $str = preg_replace("/\t/", "\\t", $str);
+        $str = preg_replace("/\r?\n/", "\\n", $str);
+        if (strstr($str, '"')) {
+            $str = '"' . str_replace('"', '""', $str) . '"';
+        }
+    }
+
+    /* Excel File Name */
+    $fileName = 'Pet Adopters.xls';
+
+    /* Excel Column Name */
+    $fields = array(
+        '#',
+        'Full Names',
+        'Email',
+        'Contacts',
+        'Address'
+    );
+
+    /* Implode Excel Data */
+    $excelData = implode("\t", array_values($fields)) . "\n";
+
+    /* Fetch All Records From The Database */
+    $query = $mysqli->query("SELECT * FROM login l
+    INNER JOIN pet_adopter pa ON pa.pet_adopter_login_id  = l.login_id");
+    if ($query->num_rows > 0) {
+        /* Load All Fetched Rows */
+        $cnt = 1;
+        while ($row = $query->fetch_assoc()) {
+            $lineData = array(
+                $cnt,
+                $row['pet_adopter_name'],
+                $row['pet_adopter_email'],
+                $row['pet_adopter_phone_number'],
+                $row['pet_adopter_address']
+            );
+            $cnt = $cnt + 1;
+            array_walk($lineData, 'filterData');
+            $excelData .= implode("\t", array_values($lineData)) . "\n";
+        }
+    } else {
+        $excelData .= 'No Pet Adopters Records Available...' . "\n";
+    }
+
+    /* Generate Header File Encodings For Download */
+    header("Content-Type: application/vnd.ms-excel");
+    header("Content-Disposition: attachment; filename=\"$fileName\"");
+
+    /* Render  Excel Data For Download */
+    echo $excelData;
+
+    exit;
 } else if ($_GET['module'] == '') {
     /* Payments */
 } else {
