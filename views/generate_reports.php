@@ -384,9 +384,100 @@ if ($_GET['module'] == 'Pets') {
     echo $excelData;
 
     exit;
+} else if ($_GET['module'] == 'Payment') {
+    /* Get Payment Reports */
+    function filterData(&$str)
+    {
+        $str = preg_replace("/\t/", "\\t", $str);
+        $str = preg_replace("/\r?\n/", "\\n", $str);
+        if (strstr($str, '"')) {
+            $str = '"' . str_replace('"', '""', $str) . '"';
+        }
+    }
+
+    /* Excel File Name */
+    $fileName = 'Pet Adoptions.xls';
+
+    /* Excel Column Name */
+    $fields = array(
+        '#',
+        'Payment Ref Number',
+        'Payment Amount',
+        'Payment Date',
+        'Payment Means',
+        'Adoption Ref Number',
+        'Adoption Date',
+        'Adopter Full Names',
+        'Adopter Email',
+        'Adopter Contacts',
+        'Adopter Address',
+        'Pet Type',
+        'Pet Breed',
+        'Pet Age',
+        'Pet Health Status',
+        'Pet Owner Full Names',
+        'Pet Owner Email',
+        'Pet Owner Contacts',
+        'Pet Owner Address',
+        'Adoption Payment Status',
+        'Adoption Return Status'
+    );
+
+    /* Implode Excel Data */
+    $excelData = implode("\t", array_values($fields)) . "\n";
+
+    /* Fetch All Records From The Database */
+    $query = $mysqli->query("SELECT * FROM payment pay 
+    INNER JOIN pet_adoption pa ON pa.pet_adoption_id = pay.payment_pet_adoption_id 
+    INNER JOIN pet p ON p.pet_id = pa.pet_adoption_pet_id 
+    INNER JOIN pet_owner po ON po.pet_owner_id = p.pet_owner_id 
+    INNER JOIN pet_adopter pad ON pad.pet_adopter_id = pa.pet_adoption_pet_adopter_id");
+    if ($query->num_rows > 0) {
+        /* Load All Fetched Rows */
+        $cnt = 1;
+        while ($row = $query->fetch_assoc()) {
+            $lineData = array(
+                $cnt,
+                $row['payment_ref'],
+                $row['payment_amount'],
+                date('d M Y', strtotime($row['payment_date'])),
+                $row['payment_means'],
+                $row['pet_adoption_ref'],
+                date('d M Y', strtotime($row['pet_adoption_date'])),
+                $row['pet_adopter_name'],
+                $row['pet_adopter_email'],
+                $row['pet_adopter_phone_number'],
+                $row['pet_adopter_address'],
+                $row['pet_type'],
+                $row['pet_breed'],
+                $row['pet_age'],
+                $row['pet_health_status'],
+                $row['pet_owner_name'],
+                $row['pet_owner_email'],
+                $row['pet_owner_contacts'],
+                $row['pet_owner_address'],
+                $row['pet_adoption_payment_status'],
+                $row['pet_adoption_return_status']
+            );
+            $cnt = $cnt + 1;
+            array_walk($lineData, 'filterData');
+            $excelData .= implode("\t", array_values($lineData)) . "\n";
+        }
+    } else {
+        $excelData .= 'No Pet Adopters Records Available...' . "\n";
+    }
+
+    /* Generate Header File Encodings For Download */
+    header("Content-Type: application/vnd.ms-excel");
+    header("Content-Disposition: attachment; filename=\"$fileName\"");
+
+    /* Render  Excel Data For Download */
+    echo $excelData;
+
+    exit;
 } else {
-    /* Show User Err */
+    /* End This User Session */
     $_SESSION['err'] = 'Kindly stop messing with my urls';
-    header('Location: error');
+    header('Location: logout');
     exit;
 }
