@@ -358,6 +358,7 @@ if ($_GET['module'] == 'Pets') {
                 $row['pet_adopter_phone_number'],
                 $row['pet_adopter_address'],
                 $row['pet_type'],
+                $row['pet_breed'],
                 $row['pet_age'],
                 $row['pet_health_status'],
                 $row['pet_owner_name'],
