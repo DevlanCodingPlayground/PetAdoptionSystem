@@ -85,10 +85,11 @@ if ($_GET['module'] == 'Pets') {
     }
 
     /* Excel File Name */
-    $fileName = 'Pets' . 'xls';
+    $fileName = 'Pets.xls';
 
     /* Excel Column Name */
     $fields = array(
+        '#',
         'Breed',
         'Type',
         'Age',
@@ -107,8 +108,10 @@ if ($_GET['module'] == 'Pets') {
     $query = $mysqli->query("SELECT * FROM pet p INNER JOIN pet_owner po ON p.pet_owner_id = po.pet_owner_id");
     if ($query->num_rows > 0) {
         /* Load All Fetched Rows */
+        $cnt = 1;
         while ($row = $query->fetch_assoc()) {
             $lineData = array(
+                $cnt,
                 $row['pet_breed'],
                 $row['pet_type'],
                 $row['pet_age'],
@@ -118,8 +121,8 @@ if ($_GET['module'] == 'Pets') {
                 $row['pet_health_status'],
                 $row['pet_adoption_status'],
                 $row['pet_description']
-
             );
+            $cnt = $cnt + 1;
             array_walk($lineData, 'filterData');
             $excelData .= implode("\t", array_values($lineData)) . "\n";
         }
