@@ -190,4 +190,15 @@ if ($_GET['module'] == 'Pets') {
     echo $excelData;
 
     exit;
+} else if ($_GET['module'] == '') {
+    /* Pet Owners */
+} else if ($_GET['module'] == '') {
+    /* Adoptions */
+} else if ($_GET['module'] == '') {
+    /* Payments */
+} else {
+    /* Show User Err */
+    $_SESSION['err'] = 'Kindly stop messing with my urls';
+    header('Location: error');
+    exit;
 }
