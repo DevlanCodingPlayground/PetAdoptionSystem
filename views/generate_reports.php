@@ -202,13 +202,15 @@ if ($_GET['module'] == 'Pets') {
     }
 
     /* Excel File Name */
-    $fileName = 'Staffs.xls';
+    $fileName = 'Pet Owners.xls';
 
     /* Excel Column Name */
     $fields = array(
         '#',
         'Full Names',
-        'Login Username',
+        'Email',
+        'Contacts',
+        'Address'
     );
 
     /* Implode Excel Data */
@@ -216,22 +218,24 @@ if ($_GET['module'] == 'Pets') {
 
     /* Fetch All Records From The Database */
     $query = $mysqli->query("SELECT * FROM login l
-    INNER JOIN admin a ON a.admin_login_id  = l.login_id");
+    INNER JOIN pet_owner pa ON pa.pet_owner_login_id  = l.login_id");
     if ($query->num_rows > 0) {
         /* Load All Fetched Rows */
         $cnt = 1;
         while ($row = $query->fetch_assoc()) {
             $lineData = array(
                 $cnt,
-                $row['admin_name'],
-                $row['login_username'],
+                $row['pet_owner_name'],
+                $row['pet_owner_email'],
+                $row['pet_owner_contacts'],
+                $row['pet_owner_address']
             );
             $cnt = $cnt + 1;
             array_walk($lineData, 'filterData');
             $excelData .= implode("\t", array_values($lineData)) . "\n";
         }
     } else {
-        $excelData .= 'No Staffs Records Available...' . "\n";
+        $excelData .= 'No Pet Owner Records Available...' . "\n";
     }
 
     /* Generate Header File Encodings For Download */
