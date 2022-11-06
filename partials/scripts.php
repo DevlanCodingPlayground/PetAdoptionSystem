@@ -35,6 +35,8 @@
 <script src="../public/js/pages/dashboard2.js"></script>
 <!-- Boxlight -->
 <script type="text/javascript" src="../public/plugins/boxlight/jquery.blImageCenter.js"></script>
+<!-- ChartJS -->
+<script src="../public/plugins/chart.js/Chart.min.js"></script>
 <!-- Init  Alerts -->
 <?php include('alerts.php'); ?>
 <script>
