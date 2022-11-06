@@ -192,15 +192,9 @@ require_once('../partials/head.php');
                         <!-- ./col -->
                         <hr>
                         <div class="col-lg-6 col-6">
-                            <div class="card card-danger">
+                            <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Donut Chart</h3>
-
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                                    </div>
+                                    <h3 class="card-title">Pets Availability</h3>
                                 </div>
                                 <div class="card-body">
                                     <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
@@ -209,15 +203,9 @@ require_once('../partials/head.php');
                             </div>
                         </div>
                         <div class="col-lg-6 col-6">
-                            <div class="card card-danger">
+                            <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Donut Chart</h3>
-
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                                    </div>
+                                    <h3 class="card-title">Payments Based On Means</h3>
                                 </div>
                                 <div class="card-body">
                                     <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
