@@ -64,3 +64,7 @@
  *   TORT OR ANY OTHER THEORY OF LIABILITY, EXCEED THE LICENSE FEE PAID BY YOU, IF ANY.
  *
  */
+
+ /* 
+ Chart 1 - Pie chart comparison showing number of adopted pets aganist available
+*/

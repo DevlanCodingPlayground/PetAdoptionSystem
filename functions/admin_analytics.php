@@ -108,6 +108,9 @@ $stmt->bind_result($available_pets);
 $stmt->fetch();
 $stmt->close();
 
+/* Adopted pet */
+$adopted_pets = abs($available_pets - $pets);
+
 
 /* Total Amount */
 $query = "SELECT SUM(payment_amount)  FROM payment ";
