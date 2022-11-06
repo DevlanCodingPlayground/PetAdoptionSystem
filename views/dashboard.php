@@ -189,20 +189,6 @@ require_once('../partials/head.php');
                                 <a href="payments" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
-                        <!-- ./col -->
-                        <hr>
-                        <div class="col-lg-6 col-6">
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Pets Availability</h3>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                        </div>
-                        
                     </div>
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
