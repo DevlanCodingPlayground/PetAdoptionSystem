@@ -66,6 +66,8 @@
  */
 
 $login_access_level = mysqli_real_escape_string($mysqli, $_SESSION['login_id']);
+$login_id = mysqli_real_escape_string($mysqli, $_SESSION['login_id']);
+
 
 if ($login_access_level == 'Administrator') {
     /* Pet Owners */
@@ -123,5 +125,43 @@ if ($login_access_level == 'Administrator') {
 } else if ($login_access_level == 'Owner') {
     /* Load Owner Analytics */
 } else if ($login_access_level == 'Adopter') {
-    /* Load Adopter Analytics */
+    $ret = "SELECT * FROM login l
+    INNER JOIN pet_adopter pa ON pa.pet_adopter_login_id  = l.login_id
+    WHERE l.login_id = '{$login_id}'";
+    $stmt = $mysqli->prepare($ret);
+    $stmt->execute(); //ok
+    $res = $stmt->get_result();
+    while ($adopter = $res->fetch_object()) {
+        /* Load Adopter Analytics */
+
+
+        /* 1. Available Pets */
+        $query = "SELECT COUNT(*)  FROM pet ";
+        $stmt = $mysqli->prepare($query);
+        $stmt->execute();
+        $stmt->bind_result($pets);
+        $stmt->fetch();
+        $stmt->close();
+
+
+        /* 2. My Adoptions */
+        $query = "SELECT COUNT(*)  FROM pet_adoption
+        WHERE pet_adoption_pet_adopter_id = '{$adopter->adopter_id}'";
+        $stmt = $mysqli->prepare($query);
+        $stmt->execute();
+        $stmt->bind_result($pet_adoptions);
+        $stmt->fetch();
+        $stmt->close();
+
+
+        /* 3. Expenditure */
+        $query = "SELECT SUM(payment_amount) FROM payment pay 
+        INNER JOIN pet_adoption pa ON pa.pet_adoption_id = pay.payment_pet_adoption_id 
+        WHERE pa.pet_adoption_pet_adopter_id = '{$adopter->adopter_id}'";
+        $stmt = $mysqli->prepare($query);
+        $stmt->execute();
+        $stmt->bind_result($pet_adoptions_payments);
+        $stmt->fetch();
+        $stmt->close();
+    }
 }
