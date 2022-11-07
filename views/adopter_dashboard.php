@@ -68,7 +68,7 @@ session_start();
 require_once('../config/checklogin.php');
 require_once('../config/config.php');
 require_once('../config/codeGen.php');
-require_once('../functions/adopter_analytics.php');
+require_once('../functions/admin_analytics.php');
 require_once('../partials/head.php');
 ?>
 
@@ -103,7 +103,46 @@ require_once('../partials/head.php');
             <div class="content">
                 <div class="container">
                     <div class="row">
+                        <div class="col-lg-4 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3><?php echo $available_pets; ?></h3>
+                                    <p>Available Pets</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-dog"></i>
+                                </div>
+                                <a href="adopter_pets" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
 
+                        <div class="col-lg-4 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3><?php echo $pet_adoptions; ?></h3>
+                                    <p>Successful Adoptions</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-paw"></i>
+                                </div>
+                                <a href="adopter_adoptions" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>Ksh <?php echo number_format($pet_adoptions_payments); ?></h3>
+                                    <p>Payments</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                </div>
+                                <a href="payments" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
