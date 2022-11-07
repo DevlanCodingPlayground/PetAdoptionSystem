@@ -25,8 +25,8 @@
 <!-- Boxlight -->
 <script type="text/javascript" src="../public/plugins/boxlight/jquery.blImageCenter.js"></script>
 <!-- Load scripts -->
+<?php include('alerts.php'); ?>
 <!-- Init  Alerts -->
-
 <script>
     // Prevent Double Resubmission
     if (window.history.replaceState) {
