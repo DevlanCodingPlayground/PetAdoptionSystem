@@ -82,16 +82,16 @@ if (isset($_POST['Login'])) {
     $_SESSION['login_id'] = $login_id;
     $_SESSION['login_rank'] = $login_rank;
 
-    if (($rs && $login_rank == "administrator")) {
+    if (($rs && $login_rank == "Administrator")) {
         /* Pass This Alert Via Session */
         $_SESSION['success'] = 'You Have Successfully Logged In';
         header('Location: dashboard');
         exit;
-    } elseif ($rs && $user_access_level == "owner") {
+    } elseif ($rs && $login_rank == "Owner") {
         $_SESSION['success'] = 'Successfully logged in as pet owner';
         header('Location: owner_dashboard');
         exit;
-    } elseif ($rs && $user_access_level == "adopter") {
+    } elseif ($rs && $login_rank == "Adopter") {
         $_SESSION['success'] = 'Successfully logged in as pet adopter';
         header('Location: adopter_dashboard');
         exit;
