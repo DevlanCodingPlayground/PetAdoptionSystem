@@ -1,7 +1,5 @@
 <!-- jQuery -->
 <script src="../public/plugins/jquery/jquery.min.js"></script>
-<!-- ChartJS -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 <!-- Bootstrap -->
 <script src="../public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
@@ -28,6 +26,7 @@
 <script type="text/javascript" src="../public/plugins/boxlight/jquery.blImageCenter.js"></script>
 <!-- Load scripts -->
 <!-- Init  Alerts -->
+
 <script>
     // Prevent Double Resubmission
     if (window.history.replaceState) {
