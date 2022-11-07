@@ -124,6 +124,7 @@ if (isset($_POST['Add_Payment'])) {
         include('../api/flutterwave/process_payment.php');
     } else {
         /* Handle Mobile Payments - To Avoid Messy Codebases Just Include The File Here */
+        $err = "Payment method is not supported";
     }
 }
 

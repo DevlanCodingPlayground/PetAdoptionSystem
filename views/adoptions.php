@@ -277,7 +277,6 @@ require_once('../partials/head.php');
                                                                             <select type="text" required name="payment_means" class="form-control select2bs4">
                                                                                 <option>Cash</option>
                                                                                 <option>Credit / Debit Card</option>
-                                                                                <option>Mobile Payment</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="text-center text-danger">
