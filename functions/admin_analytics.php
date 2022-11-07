@@ -65,57 +65,63 @@
  *
  */
 
-/* Pet Owners */
-$query = "SELECT COUNT(*)  FROM pet_owner ";
-$stmt = $mysqli->prepare($query);
-$stmt->execute();
-$stmt->bind_result($pet_owners);
-$stmt->fetch();
-$stmt->close();
+$login_access_level = mysqli_real_escape_string($mysqli, $_SESSION['login_id']);
+
+if ($login_access_level == 'Administrator') {
+    /* Pet Owners */
+    $query = "SELECT COUNT(*)  FROM pet_owner ";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($pet_owners);
+    $stmt->fetch();
+    $stmt->close();
 
 
-/* Pet Adopters */
-$query = "SELECT COUNT(*)  FROM pet_adopter ";
-$stmt = $mysqli->prepare($query);
-$stmt->execute();
-$stmt->bind_result($pet_adopters);
-$stmt->fetch();
-$stmt->close();
+    /* Pet Adopters */
+    $query = "SELECT COUNT(*)  FROM pet_adopter ";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($pet_adopters);
+    $stmt->fetch();
+    $stmt->close();
 
-/* Registered Pets */
-$query = "SELECT COUNT(*)  FROM pet ";
-$stmt = $mysqli->prepare($query);
-$stmt->execute();
-$stmt->bind_result($pets);
-$stmt->fetch();
-$stmt->close();
-
-
-/* Successful Adoptions */
-$query = "SELECT COUNT(*)  FROM pet_adoption ";
-$stmt = $mysqli->prepare($query);
-$stmt->execute();
-$stmt->bind_result($pet_adoptions);
-$stmt->fetch();
-$stmt->close();
+    /* Registered Pets */
+    $query = "SELECT COUNT(*)  FROM pet ";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($pets);
+    $stmt->fetch();
+    $stmt->close();
 
 
-/* Available Pets */
-$query = "SELECT COUNT(*)  FROM pet WHERE pet_adoption_status = 'Available' ";
-$stmt = $mysqli->prepare($query);
-$stmt->execute();
-$stmt->bind_result($available_pets);
-$stmt->fetch();
-$stmt->close();
-
-/* Adopted pet */
-$adopted_pets = abs($available_pets - $pets);
+    /* Successful Adoptions */
+    $query = "SELECT COUNT(*)  FROM pet_adoption ";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($pet_adoptions);
+    $stmt->fetch();
+    $stmt->close();
 
 
-/* Total Amount */
-$query = "SELECT SUM(payment_amount)  FROM payment ";
-$stmt = $mysqli->prepare($query);
-$stmt->execute();
-$stmt->bind_result($payment_amount);
-$stmt->fetch();
-$stmt->close();
+    /* Available Pets */
+    $query = "SELECT COUNT(*)  FROM pet WHERE pet_adoption_status = 'Available' ";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($available_pets);
+    $stmt->fetch();
+    $stmt->close();
+
+
+
+    /* Total Amount */
+    $query = "SELECT SUM(payment_amount)  FROM payment ";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($payment_amount);
+    $stmt->fetch();
+    $stmt->close();
+} else if ($login_access_level == 'Owner') {
+    /* Load Owner Analytics */
+} else if ($login_access_level == 'Adopter') {
+    /* Load Adopter Analytics */
+}
