@@ -68,7 +68,6 @@ session_start();
 require_once('../config/checklogin.php');
 require_once('../config/config.php');
 require_once('../config/codeGen.php');
-require_once('../helpers/adoptions.php');
 require_once('../partials/head.php');
 ?>
 
@@ -117,11 +116,11 @@ require_once('../partials/head.php');
                                         <tbody>
                                             <?php
                                             $ret = "SELECT * FROM payment pay 
-                                                    INNER JOIN pet_adoption pa ON pa.pet_adoption_id = pay.payment_pet_adoption_id 
-                                                    INNER JOIN pet p ON p.pet_id = pa.pet_adoption_pet_id 
-                                                    INNER JOIN pet_owner po ON po.pet_owner_id = p.pet_owner_id 
-                                                    INNER JOIN pet_adopter pad ON pad.pet_adopter_id = pa.pet_adoption_pet_adopter_id
-                                                    WHERE pad.pet_adopter_login_id = '{$_SESSION['login_id']}'";
+                                            INNER JOIN pet_adoption pa ON pa.pet_adoption_id = pay.payment_pet_adoption_id 
+                                            INNER JOIN pet p ON p.pet_id = pa.pet_adoption_pet_id 
+                                            INNER JOIN pet_owner po ON po.pet_owner_id = p.pet_owner_id 
+                                            INNER JOIN pet_adopter pad ON pad.pet_adopter_id = pa.pet_adoption_pet_adopter_id
+                                            WHERE pad.pet_adopter_login_id = '{$_SESSION['login_id']}'";
                                             $stmt = $mysqli->prepare($ret);
                                             $stmt->execute(); //ok
                                             $res = $stmt->get_result();
@@ -145,11 +144,8 @@ require_once('../partials/head.php');
                             </div>
                         </div>
                     </div>
-                    <!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
-
-            <!-- Main Footer -->
         </div>
         <!-- ./wrapper -->
         <?php require_once('../partials/adopters_footer.php'); ?>

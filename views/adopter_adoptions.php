@@ -243,13 +243,9 @@ require_once('../partials/head.php');
                 </div>
                 <!-- /.content -->
             </div>
-            <!-- /.content-wrapper -->
-
-            <!-- Main Footer -->
-            <?php require_once('../partials/adopters_footer.php'); ?>
         </div>
         <!-- ./wrapper -->
-
+        <?php require_once('../partials/adopters_footer.php'); ?>
         <?php require_once('../partials/scripts.php'); ?>
 </body>
 
