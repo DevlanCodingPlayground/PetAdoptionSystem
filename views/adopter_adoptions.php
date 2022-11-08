@@ -102,19 +102,155 @@ require_once('../partials/head.php');
             <!-- Main content -->
             <div class="content">
                 <div class="container">
+                    <div class="row">
+                        <div class="container-fluid">
 
-                </div><!-- /.container-fluid -->
+                            <!-- Info boxes -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-warning card-outline">
+                                        <div class="card-body">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Pet Details</th>
+                                                        <th>Owner Details</th>
+                                                        <th>Adopter Details</th>
+                                                        <th>Adoption Details</th>
+                                                        <th>Manage</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $ret = "SELECT * FROM pet_adoption pa 
+                                                    INNER JOIN pet p ON p.pet_id = pa.pet_adoption_pet_id 
+                                                    INNER JOIN pet_owner po ON po.pet_owner_id = p.pet_owner_id 
+                                                    INNER JOIN pet_adopter pad ON pad.pet_adopter_id = pa.pet_adoption_pet_adopter_id";
+                                                    $stmt = $mysqli->prepare($ret);
+                                                    $stmt->execute(); //ok
+                                                    $res = $stmt->get_result();
+                                                    while ($adoptions = $res->fetch_object()) {
+                                                    ?>
+                                                        <tr>
+                                                            <td>
+                                                                Type: <?php echo $adoptions->pet_type; ?> <br>
+                                                                Breed: <?php echo $adoptions->pet_breed; ?> <br>
+                                                                Age: <?php echo $adoptions->pet_age; ?> <br>
+                                                                Health Status: <?php echo $adoptions->pet_health_status; ?>
+                                                            </td>
+                                                            <td>
+                                                                Names: <?php echo $adoptions->pet_owner_name; ?> <br>
+                                                                Contacts: <?php echo $adoptions->pet_owner_contacts; ?> <br>
+                                                                Email: <?php echo $adoptions->pet_owner_email; ?>
+                                                            </td>
+                                                            <td>
+                                                                Names: <?php echo $adoptions->pet_adopter_name; ?> <br>
+                                                                Contacts: <?php echo $adoptions->pet_adopter_phone_number; ?> <br>
+                                                                Email: <?php echo $adoptions->pet_adopter_email; ?>
+                                                            </td>
+                                                            <td>
+                                                                Date: <?php echo date('d M Y', strtotime($adoptions->pet_adoption_date)); ?> <br>
+                                                                Payment Status: <?php if ($adoptions->pet_adoption_payment_status == 'Pending') { ?>
+                                                                    <span class="badge badge-danger">Pending</span> <br>
+                                                                <?php } else {  ?>
+                                                                    <span class="badge badge-success">Paid</span> <br>
+                                                                <?php }
+                                                                                if ($adoptions->pet_adoption_return_status == 'Returned') { ?>
+                                                                    <span class="badge badge-danger">Pet Returned</span> <br>
+                                                                <?php } ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php if ($adoptions->pet_adoption_payment_status == 'Pending') { ?>
+                                                                    <a data-toggle="modal" href="#pay_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-success"><i class="fas fa-hand-holding-usd"></i> Pay</a>
+                                                                <?php }
+                                                                if ($adoptions->pet_adoption_return_status != 'Returned') { ?>
+                                                                    <a data-toggle="modal" href="#return_<?php echo $adoptions->pet_adoption_id; ?>" class="badge badge-warning"><i class="fas fa-reply"></i> Return </a>
+                                                                <?php } ?>
+                                                            </td>
+                                                            <!-- Return Modal -->
+                                                            <div class="modal fade" id="return_<?php echo $adoptions->pet_adoption_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">CONFIRM RETURN</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal">
+                                                                                <span>&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <form method="POST">
+                                                                            <div class="modal-body text-center text-danger">
+                                                                                <h4>Return This Pet?</h4>
+                                                                                <br>
+                                                                                <!-- Hide This -->
+                                                                                <input type="hidden" name="pet_id" value="<?php echo $adoptions->pet_adoption_pet_adopter_id; ?>">
+                                                                                <input type="hidden" name="pet_adoption_id" value="<?php echo $adoptions->pet_adoption_id; ?>">
+                                                                                <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                                                <input type="submit" name="Return_Pet" value="Return Pet" class="text-center btn btn-danger">
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- End Modal -->
+
+                                                            <!-- Pay Modal -->
+                                                            <div class="modal fade" id="pay_<?php echo $adoptions->pet_adoption_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">CONFIRM PAYMENT</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal">
+                                                                                <span>&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <form method="POST">
+                                                                            <div class="modal-body">
+                                                                                <h4 class="text-center text-danger">Pay KSH 500 For this adoption ?</h4>
+                                                                                <br>
+                                                                                <!-- Hide This -->
+                                                                                <div class="form-group col-md-12">
+                                                                                    <label for="">Payment means</label>
+                                                                                    <select type="text" required name="payment_means" class="form-control select2bs4">
+                                                                                        <option>Cash</option>
+                                                                                        <option>Credit / Debit Card</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="text-center text-danger">
+                                                                                    <!-- Hidden Values -->
+                                                                                    <input type="hidden" name="payment_pet_adoption_id" value="<?php echo $adoptions->pet_adoption_id; ?>">
+                                                                                    <input type="hidden" name="pet_adopter_name" value="<?php echo $adoptions->pet_adopter_name; ?>">
+                                                                                    <input type="hidden" name="pet_adopter_email" value="<?php echo $adoptions->pet_adopter_email; ?>">
+
+                                                                                    <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                                                    <input type="submit" name="Add_Payment" value="Yes, Pay" class="text-center btn btn-danger">
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- End Modal -->
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.container-fluid -->
+                    </div>
+                </div>
+                <!-- /.content -->
             </div>
-            <!-- /.content -->
+            <!-- /.content-wrapper -->
+
+            <!-- Main Footer -->
+            <?php require_once('../partials/adopters_footer.php'); ?>
         </div>
-        <!-- /.content-wrapper -->
+        <!-- ./wrapper -->
 
-        <!-- Main Footer -->
-        <?php require_once('../partials/adopters_footer.php'); ?>
-    </div>
-    <!-- ./wrapper -->
-
-    <?php require_once('../partials/scripts.php'); ?>
+        <?php require_once('../partials/scripts.php'); ?>
 </body>
 
 </html>
