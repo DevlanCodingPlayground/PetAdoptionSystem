@@ -86,7 +86,7 @@ require_once('../partials/head.php');
                 <div class="container">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark"> Pet Adopter Dashboard</h1>
+                            <h1 class="m-0 text-dark"> Pet Owner Dashboard</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -113,7 +113,7 @@ require_once('../partials/head.php');
                                 <div class="icon">
                                     <i class="fas fa-dog"></i>
                                 </div>
-                                <a href="adopter_pets" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="owner_pets" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
 
@@ -121,26 +121,26 @@ require_once('../partials/head.php');
                             <!-- small box -->
                             <div class="small-box bg-danger">
                                 <div class="inner">
-                                    <h3><?php echo $pet_adoptions; ?></h3>
-                                    <p>Successful Adoptions</p>
+                                    <h3><?php echo $adopted_pets; ?></h3>
+                                    <p>Adopted Pets</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fas fa-paw"></i>
                                 </div>
-                                <a href="adopter_adoptions" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="owner_adoptions" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <div class="col-lg-4 col-6">
                             <!-- small box -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>Ksh <?php echo number_format($pet_adoptions_payments); ?></h3>
-                                    <p>Payments</p>
+                                    <h3><?php echo $pets; ?></h3>
+                                    <p>Total Pets</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="fas fa-hand-holding-usd"></i>
+                                    <i class="fas fa-cat"></i>
                                 </div>
-                                <a href="adopter_payments" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="owner_pets" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>

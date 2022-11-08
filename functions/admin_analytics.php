@@ -124,6 +124,44 @@ if ($login_access_level == 'Administrator') {
     $stmt->close();
 } else if ($login_access_level == 'Owner') {
     /* Load Owner Analytics */
+    $ret = "SELECT * FROM login l
+    INNER JOIN pet_owner po ON po.pet_owner_login_id  = l.login_id
+    WHERE l.login_id = '{$login_id}'";
+    $stmt = $mysqli->prepare($ret);
+    $stmt->execute(); //ok
+    $res = $stmt->get_result();
+    while ($owner = $res->fetch_object()) {
+        /* Load Adopter Analytics */
+
+
+        /* 1. All pets */
+        $query = "SELECT COUNT(*)  FROM pet
+        WHERE pet_owner_id = '{$owner->pet_owner_id}'";
+        $stmt = $mysqli->prepare($query);
+        $stmt->execute();
+        $stmt->bind_result($pets);
+        $stmt->fetch();
+        $stmt->close();
+
+
+        /* 2. Adopted Pets */
+        $query = "SELECT COUNT(*)  FROM pet
+        WHERE pet_owner_id = '{$owner->pet_owner_id}' AND pet_adoption_status = 'Adopted'";
+        $stmt = $mysqli->prepare($query);
+        $stmt->execute();
+        $stmt->bind_result($adopted_pets);
+        $stmt->fetch();
+        $stmt->close();
+
+        /* 3. Available Pets */
+        $query = "SELECT COUNT(*)  FROM pet
+        WHERE pet_owner_id = '{$owner->pet_owner_id}' AND pet_adoption_status = 'Available'";
+        $stmt = $mysqli->prepare($query);
+        $stmt->execute();
+        $stmt->bind_result($available_pets);
+        $stmt->fetch();
+        $stmt->close();
+    }
 } else if ($login_access_level == 'Adopter') {
     $ret = "SELECT * FROM login l
     INNER JOIN pet_adopter pa ON pa.pet_adopter_login_id  = l.login_id
