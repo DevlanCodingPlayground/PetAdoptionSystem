@@ -95,10 +95,86 @@ require_once('../partials/head.php');
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
+                    <hr>
+                    <div class="text-right">
+                        <button type="button" data-toggle="modal" data-target="#add_modal" class="btn btn-warning"> Add Pet</button>
+                    </div>
                 </div><!-- /.container-fluid -->
+
             </div>
             <!-- /.content-header -->
+            <!-- Add Pet -->
+            <div class="modal fade fixed-right" id="add_modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog  modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header align-items-center">
+                            <div class="text-center">
+                                <h6 class="mb-0 text-bold"> Add Pet</h6>
+                            </div>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" enctype="multipart/form-data" role="form">
+                                <div class="row">
+                                    <div class="form-group col-md-6" style="display: none;">
+                                        <label for="">Pet Owner</label>
+                                        <select type="text" required name="pet_owner_id" class="form-control select2bs4">
+                                            <?php
+                                            $ret = "SELECT * FROM login l
+                                            INNER JOIN pet_owner po ON po.pet_owner_login_id  = l.login_id
+                                            WHERE l.login_id = '{$_SESSION['login_id']}'";
+                                            $stmt = $mysqli->prepare($ret);
+                                            $stmt->execute(); //ok
+                                            $res = $stmt->get_result();
+                                            while ($user = $res->fetch_object()) {
+                                            ?>
+                                                <option value="<?php echo $user->pet_owner_id; ?>"><?php echo $user->pet_owner_email; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="">Pet Type</label>
+                                        <input type="text" required name="pet_type" class="form-control">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="">Breed</label>
+                                        <input type="text" required name="pet_breed" class="form-control">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="">Age</label>
+                                        <input type="text" required name="pet_age" class="form-control">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="">Health Status</label>
+                                        <select type="text" required name="pet_health_status" class="form-control select2bs4">
+                                            <option>Healthy</option>
+                                            <option>Ill</option>
+                                        </select>
+                                    </div>
 
+                                    <div class="form-group col-md-4">
+                                        <label for="">Pet Image</label>
+                                        <div class="custom-file">
+                                            <input type="file" required name="pet_image" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                                            <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="">Pet description</label>
+                                        <textarea type="text" required name="pet_description" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <button type="submit" name="add_pet" class="btn btn-warning">Add Pet </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Pet owner -->
             <!-- Main content -->
             <div class="content">
                 <div class="container">
@@ -114,6 +190,7 @@ require_once('../partials/head.php');
                             <?php
                             $ret = "SELECT * FROM pet p 
                             INNER JOIN pet_owner po ON p.pet_owner_id = po.pet_owner_id
+                            WHERE po.pet_owner_login_id = '{$_SESSION['login_id']}'
                             ORDER BY p.pet_adoption_status DESC";
                             $stmt = $mysqli->prepare($ret);
                             $stmt->execute(); //ok
@@ -150,9 +227,6 @@ require_once('../partials/head.php');
                                         </div>
                                         <div class="card-footer">
                                             <div class="text-center">
-                                                <?php if ($pet->pet_adoption_status != 'Adopted') { ?>
-                                                    <a data-toggle="modal" href="#adopt_<?php echo $pet->pet_id; ?>" class="badge badge-success"><i class="fas fa-hand-holding-heart"></i> Adopt</a>
-                                                <?php } ?>
                                                 <a data-toggle="modal" href="#update_<?php echo $pet->pet_id; ?>" class="badge badge-primary"><i class="fas fa-edit"></i> Edit</a>
                                                 <a data-toggle="modal" href="#update_image_<?php echo $pet->pet_id; ?>" class="badge badge-warning"><i class="fas fa-image"></i> Edit Image</a>
                                                 <a data-toggle="modal" href="#delete_<?php echo $pet->pet_id; ?>" class="badge badge-danger"><i class="fas fa-trash"></i> Delete</a>
@@ -271,66 +345,7 @@ require_once('../partials/head.php');
                                     </div>
                                 </div>
                                 <!-- End Modal -->
-                                <!-- adopt modal -->
-                                <div class="modal fade fixed-right" id="adopt_<?php echo $pet->pet_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog  modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header align-items-center">
-                                                <div class="text-bold">
-                                                    <h6 class="text-bold">Adopt this Pet</h6>
-                                                </div>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="d-flex justify-content-between">
-                                                    <h5>
-                                                        <b>Owner Name: </b> <?php echo $pet->pet_owner_name; ?> <br>
-                                                        <b>Contacts: </b><?php echo $pet->pet_owner_contacts; ?>
-                                                    </h5>
-                                                    <h5>
-                                                        <b>Email: </b> <?php echo $pet->pet_owner_email; ?><br>
-                                                        <b> Address: </b> <?php echo $pet->pet_owner_address; ?> <br>
-                                                    </h5>
-                                                </div>
-                                                <hr>
-                                                <form method="post" enctype="multipart/form-data" role="form">
-                                                    <div class="row">
-                                                        <div class="form-group col-md-8">
-                                                            <label for="">Select Pet Adopter</label>
-                                                            <select type="text" required name="pet_adoption_pet_adopter_id" class="form-control select2bs4">
-                                                                <option>Select Pet Adopter</option>
-                                                                <?php
-                                                                $adopter_ret = "SELECT * FROM login l
-                                                             INNER JOIN pet_adopter pa ON pa.pet_adopter_login_id  = l.login_id";
-                                                                $adopter_stmt = $mysqli->prepare($adopter_ret);
-                                                                $adopter_stmt->execute(); //ok
-                                                                $adopter_res = $adopter_stmt->get_result();
-                                                                while ($adopter = $adopter_res->fetch_object()) {
-                                                                ?>
-                                                                    <option value="<?php echo $adopter->pet_adopter_id; ?>"><?php echo $adopter->pet_adopter_email; ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                            <input type="hidden" name="pet_adoption_pet_id" value="<?php echo $pet->pet_id; ?>">
-                                                        </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="">Adoption Date</label>
-                                                            <input type="date" required name="pet_adoption_date" class="form-control">
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="text-right">
-                                                        <button type="submit" name="adopt_pet" class="btn btn-warning">Adopt Pet </button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end modal -->
                             <?php } ?>
-
                         </div>
                     </div><!-- /.container-fluid -->
                 </div><!-- /.container-fluid -->
