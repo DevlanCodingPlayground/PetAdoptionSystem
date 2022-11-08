@@ -137,6 +137,36 @@ require_once('../partials/head.php');
                                                     <td><?php echo date('d M Y g:ia', strtotime($payment->payment_date)); ?></td>
                                                     <td><?php echo $payment->payment_means; ?></td>
                                                 </tr>
+                                                <!-- Persist Payment Details -->
+                                                <div class="modal fade" id="adoption_<?php echo $payment->payment_pet_adoption_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Adoption Details</h5>
+                                                                <button type="button" class="close" data-dismiss="modal">
+                                                                    <span>&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="d-flex justify-content-between">
+                                                                    <h5>
+                                                                        <b>Pet Breed: </b> <?php echo $payment->pet_breed; ?> <br>
+                                                                        <b>Pet Age: </b><?php echo $payment->pet_age; ?>
+                                                                    </h5>
+                                                                    <h5>
+                                                                        <b>Date Adopted: </b> <?php echo $payment->pet_adoption_date; ?><br>
+                                                                        <b>Adopter Name: </b> <?php echo $payment->pet_adopter_name; ?> <br>
+                                                                    </h5>
+                                                                    <h5>
+                                                                        <b>Adopter Email: </b> <?php echo $payment->pet_adopter_email; ?><br>
+                                                                        <b>Adopter Contacts: </b> <?php echo $payment->pet_adopter_phone_number; ?> <br>
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End Modal -->
                                             <?php } ?>
                                         </tbody>
                                     </table>
