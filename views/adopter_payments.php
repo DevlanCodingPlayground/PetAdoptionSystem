@@ -98,60 +98,61 @@ require_once('../partials/head.php');
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
-
-            <!-- Main content -->
             <div class="content">
-                <div class="container-fluid">
-                    <div class="card card-warning card-outline">
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Payment Ref</th>
-                                        <th>Adoption Ref</th>
-                                        <th>Payment Amount</th>
-                                        <th>Payment Date</th>
-                                        <th>Payment Means</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $ret = "SELECT * FROM payment pay 
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-12">
+                            <div class="card card-warning card-outline">
+                                <div class="card-body">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Payment Ref</th>
+                                                <th>Adoption Ref</th>
+                                                <th>Payment Amount</th>
+                                                <th>Payment Date</th>
+                                                <th>Payment Means</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $ret = "SELECT * FROM payment pay 
                                                     INNER JOIN pet_adoption pa ON pa.pet_adoption_id = pay.payment_pet_adoption_id 
                                                     INNER JOIN pet p ON p.pet_id = pa.pet_adoption_pet_id 
                                                     INNER JOIN pet_owner po ON po.pet_owner_id = p.pet_owner_id 
                                                     INNER JOIN pet_adopter pad ON pad.pet_adopter_id = pa.pet_adoption_pet_adopter_id
                                                     WHERE pad.pet_adopter_login_id = '{$_SESSION['login_id']}'";
-                                    $stmt = $mysqli->prepare($ret);
-                                    $stmt->execute(); //ok
-                                    $res = $stmt->get_result();
-                                    while ($payment = $res->fetch_object()) {
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $payment->payment_ref; ?></td>
-                                            <td>
-                                                <a data-toggle="modal" href="#adoption_<?php echo $payment->payment_pet_adoption_id; ?>">
-                                                    <?php echo $payment->pet_adoption_ref; ?>
-                                                </a>
-                                            </td>
-                                            <td>Ksh <?php echo number_format($payment->payment_amount); ?></td>
-                                            <td><?php echo date('d M Y g:ia', strtotime($payment->payment_date)); ?></td>
-                                            <td><?php echo $payment->payment_means; ?></td>
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                                            $stmt = $mysqli->prepare($ret);
+                                            $stmt->execute(); //ok
+                                            $res = $stmt->get_result();
+                                            while ($payment = $res->fetch_object()) {
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $payment->payment_ref; ?></td>
+                                                    <td>
+                                                        <a data-toggle="modal" href="#adoption_<?php echo $payment->payment_pet_adoption_id; ?>">
+                                                            <?php echo $payment->pet_adoption_ref; ?>
+                                                        </a>
+                                                    </td>
+                                                    <td>Ksh <?php echo number_format($payment->payment_amount); ?></td>
+                                                    <td><?php echo date('d M Y g:ia', strtotime($payment->payment_date)); ?></td>
+                                                    <td><?php echo $payment->payment_means; ?></td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- /.row -->
                 </div><!-- /.container-fluid -->
-                <!-- /.content -->
             </div>
-            <!-- /.content-wrapper -->
 
             <!-- Main Footer -->
-            <?php require_once('../partials/adopters_footer.php'); ?>
         </div>
         <!-- ./wrapper -->
+        <?php require_once('../partials/adopters_footer.php'); ?>
 
         <?php require_once('../partials/scripts.php'); ?>
 </body>
