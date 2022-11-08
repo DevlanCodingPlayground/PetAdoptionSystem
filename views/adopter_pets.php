@@ -202,7 +202,7 @@ require_once('../partials/head.php');
                                                         </div>
                                                         <div class="form-group col-md-12">
                                                             <label for="">Adoption Date</label>
-                                                            <input type="date" value="<?php echo date('Y-m-d') ?>" required name="pet_adoption_date" class="form-control">
+                                                            <input readonly type="date" value="<?php echo date('Y-m-d') ?>" required name="pet_adoption_date" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="text-right">
