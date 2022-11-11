@@ -193,7 +193,6 @@ require_once('../partials/head.php');
                     <!-- Info boxes -->
                     <div class="row">
                         <?php
-
                         $per_page_record = 4;
                         if (isset($_GET["page"])) {
                             $page  = $_GET["page"];
