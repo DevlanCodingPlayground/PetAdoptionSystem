@@ -64,7 +64,7 @@
  *   TORT OR ANY OTHER THEORY OF LIABILITY, EXCEED THE LICENSE FEE PAID BY YOU, IF ANY.
  *
  */
-
+$login_access_level = mysqli_real_escape_string($mysqli, $_SESSION['login_rank']);
 
 if ($login_access_level == 'Adopter') { ?>
     <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
