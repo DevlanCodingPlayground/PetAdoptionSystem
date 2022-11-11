@@ -429,8 +429,6 @@ require_once('../partials/head.php');
                                 $row = mysqli_fetch_row($rs_result);
                                 $total_records = $row[0];
 
-                                echo "</br>";
-                                // Number of pages required.   
                                 $total_pages = ceil($total_records / $per_page_record);
                                 $pagLink = "";
 
