@@ -123,7 +123,7 @@ require_once('../partials/head.php');
                             $ret = "SELECT * FROM pet p 
                             INNER JOIN pet_owner po ON p.pet_owner_id = po.pet_owner_id
                             ORDER BY p.pet_adoption_status DESC
-                            LIMIT $start_from, $per_page_record ";
+                            LIMIT $start_from, $per_page_record";
                             $stmt = $mysqli->prepare($ret);
                             $stmt->execute(); //ok
                             $res = $stmt->get_result();
