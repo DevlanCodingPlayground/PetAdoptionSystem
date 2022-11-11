@@ -193,7 +193,17 @@ require_once('../partials/head.php');
                     <!-- Info boxes -->
                     <div class="row">
                         <?php
-                        $ret = "SELECT * FROM pet p INNER JOIN pet_owner po ON p.pet_owner_id = po.pet_owner_id";
+
+                        $per_page_record = 4;
+                        if (isset($_GET["page"])) {
+                            $page  = $_GET["page"];
+                        } else {
+                            $page = 1;
+                        }
+                        $start_from = ($page - 1) * $per_page_record;
+                        $ret = "SELECT * FROM pet p 
+                        INNER JOIN pet_owner po ON p.pet_owner_id = po.pet_owner_id
+                        LIMIT $start_from, $per_page_record ";
                         $stmt = $mysqli->prepare($ret);
                         $stmt->execute(); //ok
                         $res = $stmt->get_result();

@@ -73,7 +73,6 @@ require_once('../partials/head.php');
 
 <body class="hold-transition layout-top-nav">
     <div class="wrapper">
-
         <!-- Navbar -->
         <?php require_once('../partials/adopters_header.php'); ?>
         <!-- /.navbar -->
